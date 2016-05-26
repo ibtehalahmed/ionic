@@ -1,0 +1,32 @@
+<ion-view view-title="Login" align-title="left">
+    <ion-content style="background: url(img/photo10.jpg) center; background-size: cover;">
+        <div class="hero no-header flat">
+            <div class="content">
+                <div class="app-icon"></div>
+                <h1>اطبخلي</h1>
+            </div>
+        </div>
+         <form ng-submit="login(user)">
+
+        <div class="list">
+            <ion-md-input placeholder="الاسم" highlight-color="balanced" ng-model="user.name" type="text"></ion-md-input>
+            <ion-md-input placeholder="الباسورد" highlight-color="energized"ng-model="user.password" type="password"></ion-md-input>
+        </div>
+        <div class="padding row">
+            <div class="col">
+            <button  class="button button-balanced link  ">تسجيل الدخول</button>
+            </div>
+            <div class="col">
+            <button  class="button button-balanced link  ">تسجيل لأول مرة</button>
+            </div>
+        </div>
+             <a ui-sref="app.categories">gggg</a>             <div id="error">
+             </div>
+         </form>
+       <!-- <div class="button-bar social-login">
+            <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
+            <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
+            <button class="button button-small button-border icon-left ion-social-facebook button-positive-900">Facebook</button>
+        </div>-->
+    </ion-content>
+</ion-view>
