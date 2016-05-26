@@ -4,7 +4,9 @@
             <ion-nav-back-button class="no-text">
             </ion-nav-back-button>
             <ion-nav-buttons side="right">
-                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right">
+
+                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right"ng-click="checkAuth()">
+
                 </button>
             </ion-nav-buttons>
         </ion-nav-bar>
@@ -19,7 +21,8 @@
         <ion-content class="stable-bg has-expanded-header">
             <ion-list>
                
-                <ion-item nav-clear menu-close ui-sref="app.login">
+                <ion-item nav-clear menu-close ng-hide="check" ui-sref="app.login">
+
                 تسجيل الدخول
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.profile">
@@ -29,7 +32,8 @@
                    العروض المتاحه
                 </ion-item>
 
-                <ion-item nav-clear menu-close ui-sref="app.register">
+                <ion-item nav-clear menu-close ng-hide="check" ui-sref="app.register">
+
                    التسجيل لاول مره
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.allorders">
@@ -42,6 +46,11 @@
                  <ion-item nav-clear menu-close ng-click="getcats()">
                   الاصناف
                 </ion-item>
+                <ion-item nav-clear menu-close id="logout" ng-show="check"ng-click="logout()">
+                    تسجيل الخروج
+                </ion-item>
+                
+
               
             </ion-list>
         </ion-content>

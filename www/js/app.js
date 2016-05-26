@@ -6,9 +6,13 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$rootScope,$state,userModel) {
     $ionicPlatform.ready(function() {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+               if ( userModel.getAuthStatus()){
+                   userModel.check_user_type()
+               }
+ // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -17,7 +21,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+        $rootScope.$on("$routeChangeStart",function(event,next,current){
+       // console.log(next.$$route.authenticated);
+
+       //if user is authenticated and tried to hit root ,redirect him to the previous page
+
+      });
+
     });
+    
+
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -44,6 +57,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
 
     .state('app.login', {
         url: '/login',
+
         views: {
             'menuContent': {
                 templateUrl: 'templates/login.html',
@@ -69,6 +83,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     })
         .state('app.categories', {
         url: '/categories',
+
         views: {
             'menuContent': {
                 templateUrl: 'templates/categories.html',
@@ -137,5 +152,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     ;
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/register');
+    $urlRouterProvider.otherwise('/app/login');
+
 });

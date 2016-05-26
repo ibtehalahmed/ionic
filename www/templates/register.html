@@ -7,24 +7,28 @@
             </div>
         </div>
         <div class="list">
-            <ion-md-input placeholder="الاسم" highlight-color="balanced" type="text"></ion-md-input>
+            <ion-md-input placeholder="الاسم" highlight-color="balanced" type="text"ng-model="user.name"></ion-md-input>
            
 
-            <ion-md-input placeholder="الباسورد" highlight-color="energized" type="password"></ion-md-input>
-
+            <ion-md-input placeholder="كلمة السر" highlight-color="energized" type="password"ng-model="user.password"></ion-md-input>
             
+            <ion-md-input placeholder="البريد الالكتروني" highlight-color="energized" type="text"ng-model="user.email"></ion-md-input>
 
-            <ion-md-input placeholder="العنوان" highlight-color="energized" type="password"></ion-md-input>
 
-            <ion-md-input placeholder="التليفون" highlight-color="energized" type="password"></ion-md-input>
+            <ion-md-input placeholder="العنوان" highlight-color="energized" type="text" ng-model="user.address"></ion-md-input>
 
-            <ion-md-input placeholder="شيف ولا زبون؟ " highlight-color="energized" type="password"></ion-md-input>
+            <ion-md-input placeholder="التليفون" highlight-color="energized" type="text" ng-model="user.phone"></ion-md-input>
 
+            <ion-md-input placeholder="شيف ولا زبون؟ " highlight-color="energized" type="text" ng-model="user.usertype"></ion-md-input>
 
 
         </div>
         <div class="padding">
-            <button ui-sref="app.profile" class="button button-full button-assertive link">حفظ البيانات</button>
+            <button ng-click="register(user)" class="button button-full button-assertive link">حفظ البيانات</button>
+        </div>
+        <div id="error">
+            
+
         </div>
        <!-- <div class="button-bar social-login">
             <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
