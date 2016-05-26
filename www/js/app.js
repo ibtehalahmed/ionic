@@ -12,6 +12,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
                    userModel.check_user_type()
                }
  // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -29,6 +30,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
 
     });
     
+
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -55,7 +57,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
 
     .state('app.login', {
         url: '/login',
-        cache: false,
 
         views: {
             'menuContent': {
@@ -82,12 +83,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     })
         .state('app.categories', {
         url: '/categories',
-        cache: false,
 
         views: {
             'menuContent': {
                 templateUrl: 'templates/categories.html',
-                controller: 'CategoryController',
+                controller: 'CategoryController'
             },
             'fabContent': {
                 template: ''
@@ -153,4 +153,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
+
 });
