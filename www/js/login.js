@@ -3,7 +3,7 @@ angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$s
     $timeout(function() {
         
     }, 0);
-    ionicMaterialInk.displayEffect();
+    
     $scope.login = function(user){
         if (typeof user != "undefined" )
         {

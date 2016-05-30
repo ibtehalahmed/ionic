@@ -186,8 +186,6 @@ $scope.$parent.showHeader();
         });
     }, 700);
 
-
-    
     ionicMaterialInk.displayEffect();
      $scope.get_meal =function(){
     return $http ({

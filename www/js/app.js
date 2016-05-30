@@ -6,8 +6,12 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
 
-.run(function($ionicPlatform,$rootScope,$state,userModel) {
+.run(function($ionicPlatform,$ionicPopup,$rootScope,$state,userModel) {
+
+
+
     $ionicPlatform.ready(function() {
+        if(window.Connection) { if(navigator.connection.type == Connection.NONE) { $ionicPopup.confirm({ title: "Internet Disconnected", content: "The internet is disconnected on your device." }) .then(function(result) { if(!result) { ionic.Platform.exitApp(); } }); } }
                if ( userModel.getAuthStatus()){
                    userModel.check_user_type()
                }
@@ -21,12 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
-        $rootScope.$on("$routeChangeStart",function(event,next,current){
-       // console.log(next.$$route.authenticated);
-
-       //if user is authenticated and tried to hit root ,redirect him to the previous page
-
-      });
+        
 
     });
     
