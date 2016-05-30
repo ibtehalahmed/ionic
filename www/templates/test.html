@@ -1,0 +1,33 @@
+<ion-view view-title="Register" align-title="left">
+    <ion-content style="background: url(img/photo10.jpg) center; background-size: cover;">
+        <div class="hero no-header flat">
+            <div class="content">
+                <div class="app-icon"></div>
+                <h1>اطبخلي</h1>
+            </div>
+        </div>
+        <div class="list">
+
+            <ion-md-input placeholder="اسم الوجبة" highlight-color="balanced" type="text"ng-model="meal.name"></ion-md-input>
+            <ion-md-input placeholder="وقت التحضير" highlight-color="energized" type="text"ng-model="meal.time"></ion-md-input>
+            <ion-md-input placeholder="وصف الوجبة" highlight-color="energized" type="text"ng-model="meal.description"></ion-md-input>
+            <ion-md-input placeholder="الكمية المتاحة" highlight-color="energized" type="text" ng-model="meal.quantity"></ion-md-input>
+            <ion-md-input placeholder="سعر الوجبة" highlight-color="energized" type="text" ng-model="meal.price"></ion-md-input>
+            <ion-md-input placeholder="التصنيف" highlight-color="energized" type="text" ng-model="meal.category_id"></ion-md-input>
+            <ion-md-input placeholder="الاي تي" highlight-color="energized" type="text" ng-model="meal.user_id"></ion-md-input>
+
+        </div>
+        <div class="padding">
+            <button ng-click="register(user)" class="button button-full button-assertive link">إضافة</button>
+        </div>
+        <div id="error">
+            
+
+        </div>
+       <!-- <div class="button-bar social-login">
+            <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
+            <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
+            <button class="button button-small button-border icon-left ion-social-facebook button-positive-900">Facebook</button>
+        </div>-->
+    </ion-content>
+</ion-view>

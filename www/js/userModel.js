@@ -9,14 +9,17 @@ angular.module('starter').factory('userModel',function($http,$state){
               "password":data.password
         }
     }).success(function(response){
-        console.log(response);
-        localStorage.setItem('auth',response);
+        //console.log(response);
+        localStorage.setItem('auth',JSON.stringify(response));
+     person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     console.log(parsePerson.id);
       //  window.localStorage.setItem("email", response.email);
         //window.localStorage.setItem("password", response.password);   
     }).error(function(data,status,headers){
         console.log(data,status,headers)
             alert('Login error')
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+      //.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
 
 })
       
@@ -74,6 +77,40 @@ angular.module('starter').factory('userModel',function($http,$state){
      else{
          $state.go('app.categories')
      }
+ },
+ 'myPopup': function(meal){
+   //console.log(localStorage.getItem('auth'));
+    person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     //console.log(parsePerson.id);
+     return $http({
+              method: 'POST',
+              url: 'http://localhost:8000/api/user/addmeal',
+              data: {
+              
+                "name":meal.name,
+                "time":meal.time,
+                "description":meal.description,
+                "quantity":meal.quantity,
+                "price":meal.price,
+                "category_id":meal.category_id,
+                "user_id":parsePerson.id
+            }
+        
+    }).success(function(response){
+        console.log(response);
+      //  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+    }).error(function(data,status,headers){
+        console.log(data,status,headers)
+            alert('cannot insert meal')
+      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+
+}) 
+     
+     
+     
+     
  }
 
 }
