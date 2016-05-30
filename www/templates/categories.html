@@ -4,7 +4,7 @@
        <h4 class="content padding double-padding-x">الاصناف</h4>
 
        <div class="list" ng-repeat="c in all_cats">
-         <a class="item item-thumbnail-right" href="#">
+         <a class="item item-thumbnail-right" ng-click="get_meals()">
            <img src="img/checken.jpg">
            <h2>{{c.name}}</h2>
         </a>

@@ -6,18 +6,22 @@
                 <h1>طلبك الخاص</h1>
             </div>
         </div>
+          
         <div class="list">
-            <ion-md-input placeholder="الصنف" highlight-color="balanced" type="text"></ion-md-input>
+            <ion-md-input placeholder="الاسم" highlight-color="balanced" type="text" ng-model='sorder.name'></ion-md-input>
 
-            <ion-md-input placeholder="الاكلة" highlight-color="balanced" type="text"></ion-md-input>
+            <ion-md-input placeholder="الكميه" highlight-color="balanced" type="text" ng-model='sorder.quantity'></ion-md-input>
 
-            <ion-md-input placeholder="الوصف" highlight-color="balanced" type="text"></ion-md-input>
+            <ion-md-input placeholder="الوصف" highlight-color="balanced" type="text" ng-model='sorder.description'></ion-md-input>
 
            
         </div>
+         
         <div class="padding">
-            <button ui-sref="app.special-order" class="button button-full button-assertive link">تم</button>
+            <button ui-sref="app.special-order" class="button button-full button-assertive link" ng-click='submitSpecificOrder(sorder)'>تم
+            </button>
         </div>
+               
        <!-- <div class="button-bar social-login">
             <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
             <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>

@@ -1,0 +1,17 @@
+<ion-view view-title=" الوجبات">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+    
+       <h4 class="content padding double-padding-x">الوجبات</h4>
+
+       <div class="list" ng-repeat="m in all_meals">
+         <a class="item item-thumbnail-right" ng-click="get_meal()">>
+           <img src="img/checken.jpg">
+           <h2>{{m.name}}</h2>
+        </a>
+       </div>
+    <ion-list>
+  <ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
+  <ion-radio ng-model="choice" ng-value="'B'">Choose B</ion-radio>
+</ion-list>
+    </ion-content>
+</ion-view>
