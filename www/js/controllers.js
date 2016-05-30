@@ -118,53 +118,119 @@ angular.module('starter.controllers', [])
 })
 
 .controller('OffersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-        $scope.$parent.showHeader();
-
-    
+       
+    $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $timeout(function() {
-        $scope.$parent.hideHeader();
+       // $scope.$parent.hideHeader();
     }, 0);
     ionicMaterialInk.displayEffect();
 
 })
 
-.controller('CategoryController', function($scope) {
+
+.controller('CategoryController', function($scope,$state,$rootScope,$http) {
     $scope.$parent.showHeader();
-        $scope.$parent.clearFabs();
-    
+    $scope.$parent.clearFabs();
+//http://176.32.230.50/ibtehalhosting.com
+     $scope.get_meals =function(){
+    return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/1',
 
-
-   
-
-
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.all_meals=response;
+                                $state.go('app.meals')
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+}
 
   })
 
   
-  
-
-
-
-
-
-
-
 .controller('AllOrdersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    
+    $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $timeout(function() {
-        $scope.$parent.hideHeader();
+       // $scope.$parent.hideHeader();
     }, 0);
     ionicMaterialInk.displayEffect();
 
 })
 
+.controller('mealsCtrl', function($http,$scope, $state,$rootScope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    
+$scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
 
 
-.controller('SpecialOrderCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    
+    ionicMaterialInk.displayEffect();
+     $scope.get_meal =function(){
+    return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meal/1',
+
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.all_meals=response;
+                                $state.go('app.meal')
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+}
+
+})
+
+
+
+.controller('SpecialOrderCtrl', function($scope,$state,userModel,$http,$rootScope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     
     $scope.$parent.clearFabs();
+    $scope.submitSpecificOrder=function(sorder){
+        
+            var data = {
+                "name":sorder.name,
+                "quantity":sorder.quantity,
+                "description":sorder.description
+                
+            };
+    $rootScope.data = data;
+    console.log(data);
+          userModel.submitSpecificOrder(data).then(function(){
+       $state.go('app.categories');
+    
+})
+
+    }
     $timeout(function() {
         $scope.$parent.hideHeader();
     }, 0);

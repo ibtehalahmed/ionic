@@ -86,7 +86,7 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
             fabs[0].remove();
         }
     };
-    $scope.getcats =function(){
+    $scope.getcategories =function(){
     return $http ({
 				method : 'GET',
 				url : 'http://localhost:8000/api/category',

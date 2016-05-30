@@ -1,7 +1,7 @@
 angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$state,userModel, $timeout, $stateParams, ionicMaterialInk) {
     $scope.$parent.clearFabs();
     $timeout(function() {
-        $scope.$parent.hideHeader();
+        
     }, 0);
     ionicMaterialInk.displayEffect();
     $scope.login = function(user){

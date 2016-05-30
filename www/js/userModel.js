@@ -74,7 +74,39 @@ angular.module('starter').factory('userModel',function($http,$state){
      else{
          $state.go('app.categories')
      }
- }
+ },
 
+       'submitSpecificOrder' :function(data)
+       {
+           
+                    return $http({
+              method: 'POST',
+              url: 'http://localhost:8000/api/specificorder',
+              data: {
+              
+                "name":data.name,
+                "quantity":data.quantity,
+                "description":data.description,
+                
+                }        
+    }).success(function(response){
+        console.log(response);
+       // localStorage.setItem('auth',response);
+      //  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+    }).error(function(data,status,headers){
+        console.log(data,status,headers)
+      document.getElementById("error").innerHTML = "من فضلك املا كل البيانات";
+
+})
+       }
+        
+        
+        
+  /*      
+    */    
+        
+        
 }
+
 });
