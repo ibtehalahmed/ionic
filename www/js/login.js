@@ -1,10 +1,11 @@
 angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$state,userModel, $timeout, $stateParams, ionicMaterialInk) {
     $scope.$parent.clearFabs();
     $timeout(function() {
-        
+     
     }, 0);
     
     $scope.login = function(user){
+
         if (typeof user != "undefined" )
         {
             var data = {
@@ -14,7 +15,18 @@ angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$s
     $rootScope.data = data;
     
     userModel.login(data).then(function(){
-       $state.go('app.profile');
+        person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+
+        if(parsePerson.usertype==1){
+            $state.go('app.profile');
+        }
+        if(parsePerson.usertype==0){
+
+            userModel.getcategories();
+           
+        }
+       
     
 })
         }

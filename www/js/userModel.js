@@ -1,4 +1,4 @@
-angular.module('starter').factory('userModel',function($http,$state){
+angular.module('starter').factory('userModel',function( $rootScope,$http,$state){
   return {
             'login' : function(data){
            return $http({
@@ -9,13 +9,14 @@ angular.module('starter').factory('userModel',function($http,$state){
               "password":data.password
         }
     }).success(function(response){
-        //console.log(response);
+        console.log(response);
         localStorage.setItem('auth',JSON.stringify(response));
      person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
-     console.log(parsePerson.id);
+        console.log(parsePerson.usertype);
       //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+        //window.localStorage.setItem("password", response.password); 
+        window.localStorage.setItem("password", response.usertype);  
     }).error(function(data,status,headers){
         console.log(data,status,headers)
             alert('Login error')
@@ -24,6 +25,52 @@ angular.module('starter').factory('userModel',function($http,$state){
 })
       
 },
+
+        'getcategories' :function(){    
+    return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/category',
+
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.all_cats=response;
+                                $state.go('app.categories')
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+},
+
+'get_meal' :function(){
+    console.log("from mealCtrl to user model");
+    return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meal/1',
+
+            }).success (
+            function(response){
+               // console.log(response);
+                                $rootScope.meal1=response;
+                                console.log('your object returned successfully');
+                                console.log($rootScope.meal1);
+                                $state.go('app.meal');
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+},
+
+
+
+
+
 'register' : function(register_data){
            return $http({
               method: 'POST',
@@ -136,7 +183,30 @@ angular.module('starter').factory('userModel',function($http,$state){
       document.getElementById("error").innerHTML = "من فضلك املا كل البيانات";
 
 })
+       },
+       'get_meals' :function(){
+           
+               return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meal',
+
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.all_meals=response;
+                                $state.go('app.meals')
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+           
+           
        }
+       
+
         
         
         
