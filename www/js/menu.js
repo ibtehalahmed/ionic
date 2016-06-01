@@ -109,6 +109,26 @@ $scope.logout = function(){
         $state.go('app.categories');
     
 }
-
+$scope.checkType=function(){
+    $rootScope.types=false;
+    //person=typeof(localStorage.getItem('auth'));
+      //     console.log(person);
+           if(typeof(localStorage.getItem('auth')) !== "object" ){
+            // alert('hello')
+             //  alert("uuuu");    
+                person=localStorage.getItem('auth');       
+                 parsePerson=JSON.parse(person);
+                    $types= parsePerson.usertype;
+                  if ($types == 1){ $types=true;
+                  //console.log($types);
+              $rootScope.type=$types;} 
+                  if ($types == 0){ $types=false;
+                              // console.log($types);
+              $rootScope.type=$types;} 
+         //console.log($rootScope.type)
+                
+                   
+                  //  return $types;
+}}
 })        
 

@@ -20,13 +20,7 @@ angular.module('starter').controller('RegisterCtrl', function($scope,$rootScope,
     
     userModel.register(register_data).then(function(){
             $type=register_data.usertype;
-        userModel.check_user_type($type)
-               
-                    
-                
-            
-            
-            
+            userModel.check_user_type($type)
 })
         }
    

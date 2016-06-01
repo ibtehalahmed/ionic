@@ -5,7 +5,7 @@
             </ion-nav-back-button>
             <ion-nav-buttons side="right">
 
-                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right"ng-click="checkAuth()">
+                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right"ng-click="checkAuth(); checkType();">
 
                 </button>
             </ion-nav-buttons>
@@ -25,7 +25,7 @@
 
                 تسجيل الدخول
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.profile">
+                <ion-item nav-clear menu-close ng-show="type" ui-sref="app.profile">
                     شيف بروفايل
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.offers">

@@ -1,4 +1,4 @@
-angular.module('starter').factory('userModel',function($http,$state){
+angular.module('starter').factory('userModel',function($http,$state,$rootScope){
   return {
             'login' : function(data){
            return $http({
@@ -11,9 +11,7 @@ angular.module('starter').factory('userModel',function($http,$state){
     }).success(function(response){
         //console.log(response);
         localStorage.setItem('auth',JSON.stringify(response));
-     person=localStorage.getItem('auth');
-        parsePerson=JSON.parse(person);
-     console.log(parsePerson.id);
+    
       //  window.localStorage.setItem("email", response.email);
         //window.localStorage.setItem("password", response.password);   
     }).error(function(data,status,headers){
@@ -40,8 +38,8 @@ angular.module('starter').factory('userModel',function($http,$state){
         
     }).success(function(response){
         console.log(response);
-        localStorage.setItem('auth',response);
-      //  window.localStorage.setItem("email", response.email);
+        localStorage.setItem('auth',JSON.stringify(response));
+        //  window.localStorage.setItem("email", response.email);
         //window.localStorage.setItem("password", response.password);   
     }).error(function(data,status,headers){
         console.log(data,status,headers)
@@ -99,7 +97,20 @@ angular.module('starter').factory('userModel',function($http,$state){
         
     }).success(function(response){
         console.log(response);
-      //  window.localStorage.setItem("email", response.email);
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/6',
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+//  window.localStorage.setItem("email", response.email);
         //window.localStorage.setItem("password", response.password);   
     }).error(function(data,status,headers){
         console.log(data,status,headers)
@@ -112,7 +123,7 @@ angular.module('starter').factory('userModel',function($http,$state){
      
      
  },
-
+ 
        'submitSpecificOrder' :function(data)
        {
            
