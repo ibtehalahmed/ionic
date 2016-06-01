@@ -1,13 +1,12 @@
 <ion-view view-title="Profile">
-    <ion-content ng-class="{expanded:$scope.isExpanded}">
-        <div class="hero slide-up" style="background-image: url('img/profile-bg.jpg');">
+    <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
+        <div class="hero slide-up" style="background-image: url('img/photo121.jpeg');">
             <div class="content">
                 <div class="avatar" style="background-image: url('img/chef1.jpeg');"></div>
-                <h3><a class="light">شيف</a></h3>
-                <h4></h4>
+                <h3><a class="light" ng-model="user.name">شيف</a></h3>
             </div>
         </div>
-        <div class="tabs tabs-dark tabs-icon-top static">
+        <div class="tabs tabs-icon-top static my-color" >
             <a ui-sref="app.activity" class="tab-item">
                 <i class="icon ion-arrow-graph-up-right"></i> التعليقات
             </a>
@@ -29,6 +28,8 @@
     </a>
 
 </div>
+
 <button id="fab-profile"  ng-click="showPopup()" ng-show="type" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>
+
     </ion-content>
 </ion-view>

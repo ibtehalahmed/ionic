@@ -4,33 +4,30 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
+angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-material','ionMdInput'])
 
-.run(function($ionicPlatform,$rootScope,$state,userModel) {
+.run(function($ionicPlatform,$ionicPopup,$rootScope,$state,userModel) {
     $ionicPlatform.ready(function() {
-               if ( userModel.getAuthStatus()){
-                   userModel.check_user_type()
-               }
- // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        userModel.get_all_locations();
+
+    if (userModel.getAuthStatus() == true){
+        userModel.check_user_type()
+    }else{
+        $state.go('app.login')
+    }
+ // Hide the accessory sbar by default (remove this to show the accessory bar above the keyboard
 
         // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
+       
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
-        $rootScope.$on("$routeChangeStart",function(event,next,current){
-       // console.log(next.$$route.authenticated);
 
-       //if user is authenticated and tried to hit root ,redirect him to the previous page
-
-      });
+        
 
     });
     
-
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -100,7 +97,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         views: {
             'menuContent': {
                 templateUrl: 'templates/meal.html',
-                controller: 'mealsCtrl'
+                controller: 'mealCtrl'
             },
             'fabContent': {
                 template: ''

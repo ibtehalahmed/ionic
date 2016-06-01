@@ -1,19 +1,13 @@
 <ion-view view-title="Meal">
-    <ion-content ng-class="{expanded:$scope.isExpanded}">
-        <div class="hero slide-up" style="background-image: url('img/profile-bg.jpg');">
+    <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
+        <div class="hero slide-up" style="background-image: url('img/checken.jpg');">
             <div class="content">
-                <h3><a class="light">اسم الوجبه</a></h3>
-                
+                <h3><a class="light">{{meal1.name}}</a></h3>
             </div>
         </div>
-
-        <div class="list">
-          <h3>meal name</h3>
-          <h3>meal description</h3>
-          <h3>+ or - quantity</h3>
-          <h3>total price</h3>
-          <h3>button green (add to basket)</h3>
-        </div>
-
+        
+        <h1 ng-repeat="m in meal1">{{m.name }}</h1>
+         <h1 ng-repeat="m in meal1">{{m.price }}جنيه</h1>
+         
     </ion-content>
 </ion-view>

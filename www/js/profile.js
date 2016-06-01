@@ -6,7 +6,8 @@
 
         angular.module('starter').controller('ProfileCtrl', function($scope ,$http,$ionicPopup,$rootScope ,userModel,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     // Set Header
-    $scope.$parent.showHeader();
+   
+            $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
@@ -28,24 +29,24 @@
        $scope.$on('$ionicView.enter',function(){
 
            person=localStorage.getItem('auth'); 
-          // console.log(typeof(person));
+          console.log(typeof(person));
            if(typeof(person) != "undefined" ){
              //  alert("uuuu");    
                parsePerson=JSON.parse(person);
                     $type= parsePerson.usertype;
-                 //   console.log($type);
+                    console.log($type);
                     $scope.type=$type;
 }  
        }) 
-    /*    var addbuttun = document.getElementsById('fab-profile');
+      /*  var addbuttun = document.getElementsById('fab-profile');
          if(isset(localStorage.getItem('auth')) ){
             person=localStorage.getItem('auth');
             parsePerson=JSON.parse(person);
             $type=person.usertype;
-        return addbuttun.ng-show=$type;
+        //return addbuttun.ng-show=$type;
         }
-        else{return $type;}
-    */
+        else{return $type;}*/
+    
      ionicMaterialInk.displayEffect();
      $scope.showPopup = function() {
   $scope.meal = {}
@@ -83,9 +84,11 @@
 //         }
 //     
 //   });
+
 };
 
  $scope.$on('$ionicView.enter',function(){
+     
     return $http ({
                 method : 'GET',
                 url : 'http://localhost:8000/api/meals/u/6',
@@ -120,6 +123,11 @@ $scope.$on('$ionicView.enter',function(){
             }
             )
 })
+
+
+
+
+
 });
 //$scope.add_meal =function(meal){
   //  userModel.add_meal(meal);
