@@ -4,11 +4,12 @@ angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$s
         $scope.$parent.hideHeader();
     }, 0);
     ionicMaterialInk.displayEffect();
+    
     $scope.login = function(user){
         if (typeof user != "undefined" )
         {
             var data = {
-                "name":user.name,
+                "email":user.email,
                 "password":user.password
             };
     $rootScope.data = data;

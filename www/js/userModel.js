@@ -1,30 +1,30 @@
-angular.module('starter').factory('userModel',function($http,$state){
+angular.module('starter').factory('userModel',function($http,$state,$rootScope){
   return {
             'login' : function(data){
            return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/auth',
               data: {
-              "name":data.name,
+              "email":data.email,
               "password":data.password
         }
     }).success(function(response){
-        console.log(response);
-        localStorage.setItem('auth',response);
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+        localStorage.setItem('auth',JSON.stringify(response));
+   
     }).error(function(data,status,headers){
         console.log(data,status,headers)
             alert('Login error')
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
 
 })
       
 },
 'register' : function(register_data){
+    console.log('registeration');
+    console.log(register_data)
            return $http({
               method: 'POST',
-              url: 'http://localhost:8000/api/user',
+              url: 'http://localhost:8000/api/register',
               data: {
               
                 "name":register_data.name,
@@ -32,23 +32,18 @@ angular.module('starter').factory('userModel',function($http,$state){
                 "email":register_data.email,
                 "phone":register_data.phone,
                 "address":register_data.address,
-                "usertype":register_data.usertype
+                "usertype":register_data.usertype,
+                "location" :register_data.location,
             }
         
     }).success(function(response){
         console.log(response);
-        localStorage.setItem('auth',response);
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+        localStorage.setItem('auth',JSON.stringify(response));    
     }).error(function(data,status,headers){
-        console.log(data,status,headers)
-            alert('Login error')
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
-
+      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال البيانات الصحيحة";
 })
       
 },
-//check if cookie is set or not and return true or false accordingly
 'getAuthStatus' : function(){
     var status = localStorage.getItem('auth');
 
@@ -74,7 +69,22 @@ angular.module('starter').factory('userModel',function($http,$state){
      else{
          $state.go('app.categories')
      }
- }
+ },
+'get_all_locations' : function(){
+           return $http({
+              method: 'GET',
+              url: 'http://localhost:8000/api/location',
 
+    }).success(function(response){
+      //  console.log(response);
+        $rootScope.locations=response;
+    }).error(function(data,status,headers){
+        //console.log(data,status,headers)
+           // alert('Login error')
+  //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+
+})
+      
 }
+  }
 });

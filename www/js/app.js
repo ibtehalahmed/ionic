@@ -4,12 +4,13 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
+angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-material','ionMdInput'])
 
-.run(function($ionicPlatform,$rootScope,$state,userModel) {
+.run(function($ionicPlatform,$ionicPopup,$rootScope,$state,userModel) {
     $ionicPlatform.ready(function() {
+        userModel.get_all_locations();
                if ( userModel.getAuthStatus()){
-                   userModel.check_user_type()
+                   userModel.check_user_type();
                }
  // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 
@@ -21,16 +22,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
-        $rootScope.$on("$routeChangeStart",function(event,next,current){
-       // console.log(next.$$route.authenticated);
 
-       //if user is authenticated and tried to hit root ,redirect him to the previous page
-
-      });
-
-    });
-    
-
+ 
+})
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {

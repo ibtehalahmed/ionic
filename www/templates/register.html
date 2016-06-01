@@ -1,35 +1,74 @@
 <ion-view view-title="Register" align-title="left">
-    <ion-content style="background: url(img/photo10.jpg) center; background-size: cover;">
+    <ion-content style="background: url(img/lemon.jpg) center; background-size: cover;">
         <div class="hero no-header flat">
             <div class="content">
                 <div class="app-icon"></div>
                 <h1>اطبخلي</h1>
             </div>
         </div>
-        <div class="list">
-            <ion-md-input placeholder="الاسم" highlight-color="balanced" type="text"ng-model="user.name"></ion-md-input>
-           
-
-            <ion-md-input placeholder="كلمة السر" highlight-color="energized" type="password"ng-model="user.password"></ion-md-input>
+        <form name="myForm" novalidate>
+        <div class="list list-inset">
             
-            <ion-md-input placeholder="البريد الالكتروني" highlight-color="energized" type="text"ng-model="user.email"></ion-md-input>
+          <label class="item item-input">
+              <input type="text" placeholder="الاسم ستة أحرف عالأقل* " ng-model="user.name"ng-minlength="5" required>
+          </label>
+            <label class="item item-input">
+              <input type="text" placeholder="example@hotmail.com*" ng-model="user.email" required>
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="كلمة السر ستة حروف علي الأقلٌ*" ng-model="user.password" ng-minlength="6" required>
+          </label>
 
-
-            <ion-md-input placeholder="العنوان" highlight-color="energized" type="text" ng-model="user.address"></ion-md-input>
-
-            <ion-md-input placeholder="التليفون" highlight-color="energized" type="text" ng-model="user.phone"></ion-md-input>
-
-            <ion-md-input placeholder="شيف ولا زبون؟ " highlight-color="energized" type="text" ng-model="user.usertype"></ion-md-input>
-
-
-        </div>
-        <div class="padding">
+          <label class="item item-input">
+              <input type="text" placeholder="التليفون احدي عشرة رقم عالأقل*" ng-model="user.phone" ng-minlength="11" required>
+          </label>
+          <label class="item item-input">
+              <input type="text" placeholder="العنوان*" ng-model="user.address" required>
+          </label>
+          <div class="list">
+            <label class="item item-input item-select " placeholder="المنطقة*">
+                <select class="dark"ng-model="user.location" required>
+                    <option ng-repeat="location in locations" value="{{location.name}}">
+                    {{location.name}}
+                    </option>
+                </select>
+            </label>
+          </div>
+                <div class="list">
+            <label class="item item-input item-select " placeholder="المنطقة*">
+                <select class="dark"ng-model="user.usertype" required>
+                    <option  value="1">شيف
+                    </option>
+                    <option  value="0">زبون
+                    </option>
+                </select>
+            </label>
+          </div>
+      </div>
+            <div class="padding">
             <button ng-click="register(user)" class="button button-full button-assertive link">حفظ البيانات</button>
-        </div>
-        <div id="error">
+        </div>        
+         </form>
+      
+             <div id="error">
+             </div>
+        
             
 
+<div class="error">
+            <p ng-show="myForm.user.name.$error.required">* name is required</p>
+            <p ng-show="myForm.user.name.$error.minlength">* name must be longer than 5 characters</p>
+            <p ng-show="myForm.user.password.$error.required">* Password is required</p>
+            <p ng-show="myForm.user.password.$error.minlength">* Password must be longer than 6 characters</p>
+            <p ng-show="myForm.user.email.$error.required">* Password is required</p>
+            <p ng-show="myForm.user.email.$invalid && !myForm.user.email.$pristine">* email must be valid </p>
+            <p ng-show="myForm.user.phone.$error.required">* Password is required</p>
+            <p ng-show="myForm.user.phone.$invalid && !myForm.user.phone.$pristine">* email must be valid </p>
+            <p ng-show="myForm.user.address.$error.required">* Password is required</p>
+            <p ng-show="myForm.user.location.$error.required">* Password is required</p>
+            <p ng-show="myForm.user.usertype.$error.required">* Password is required</p>
         </div>
+        
        <!-- <div class="button-bar social-login">
             <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
             <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
