@@ -14,11 +14,13 @@ angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$s
                 "email":user.email,
                 "password":user.password
             };
+
     if (userModel.getAuthStatus() == true){
         userModel.check_user_type()
     }else{
         $state.go('app.login')
     }
+
     /*userModel.login(data).then(function(){
         
         person=localStorage.getItem('auth');
