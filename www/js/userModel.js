@@ -5,7 +5,7 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
               method: 'POST',
               url: 'http://localhost:8000/api/auth',
               data: {
-              "name":data.name,
+              "email":data.email,
               "password":data.password
         }
     }).success(function(response){
@@ -14,8 +14,7 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
      person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
         console.log(parsePerson.usertype);
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password); 
+        
         window.localStorage.setItem("password", response.usertype);  
     }).error(function(data,status,headers){
         console.log(data,status,headers)
@@ -74,7 +73,7 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
 'register' : function(register_data){
            return $http({
               method: 'POST',
-              url: 'http://localhost:8000/api/user',
+              url: 'http://localhost:8000/api/register',
               data: {
               
                 "name":register_data.name,
@@ -82,19 +81,17 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
                 "email":register_data.email,
                 "phone":register_data.phone,
                 "address":register_data.address,
-                "usertype":register_data.usertype
+                "usertype":register_data.usertype,
+                "location":register_data.location,
             }
         
     }).success(function(response){
         console.log(response);
-        localStorage.setItem('auth',response);
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+        localStorage.setItem('auth',response);    
     }).error(function(data,status,headers){
         console.log(data,status,headers)
             alert('Login error')
       document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
-
 })
       
 },
@@ -131,7 +128,7 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
         parsePerson=JSON.parse(person);
      //console.log(parsePerson.id);
      return $http({
-              method: 'POST',
+         method: 'POST',
               url: 'http://localhost:8000/api/user/addmeal',
               data: {
               

@@ -13,9 +13,18 @@
          <form ng-submit="login(user)">
 
         <div class="list">
-            <ion-md-input placeholder="الاسم" highlight-color="balanced" ng-model="user.name" type="text"></ion-md-input>
-            <ion-md-input placeholder="الباسورد" highlight-color="energized"ng-model="user.password" type="password"></ion-md-input>
-        </div>
+             <label class="item item-input">
+                    <span class="input-label">الايميل</span>
+                    <input type="email" name="email" ng-model="user.email" required>
+                    <p ng-show="f.email.$error.required">*مطلوب</p>
+                </label>
+            
+            <label class="item item-input">
+                    <span class="input-label">كلمة المرور</span>
+                    <input type="password" name="password" ng-model="user.password" required>
+                    <p ng-show="f.password.$error.required">*مطلوب</p>
+                </label>
+            </div>
         <div class="padding row">
             <div class="col">
             <button  class="button button-balanced link  ">تسجيل الدخول</button>
