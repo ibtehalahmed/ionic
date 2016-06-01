@@ -9,27 +9,30 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
               "password":data.password
         }
     }).success(function(response){
-        localStorage.setItem('auth',JSON.stringify(response));
+    console.log(response);    
+    localStorage.setItem('auth',JSON.stringify(response));
+     if (response.usertype == 1){
+         console.log('user is chef');
+         $state.go('app.profile')
+     }
+     else{
+         $state.go('app.categories')
+     }
    
     }).error(function(data,status,headers){
         console.log(data,status,headers)
             alert('Login error')
       //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
-        console.log(response);
-        localStorage.setItem('auth',JSON.stringify(response));
+        
+        //localStorage.setItem('auth',JSON.stringify(response));
     
       //  window.localStorage.setItem("email", response.email);
         //window.localStorage.setItem("password", response.password);   
 
-     person=localStorage.getItem('auth');
-        parsePerson=JSON.parse(person);
-        console.log(parsePerson.usertype);
+     //person=localStorage.getItem('auth');
+       // parsePerson=JSON.parse(person);
+       // console.log(parsePerson.usertype);
 
-//new
-    }).error(function(data,status,headers){
-        console.log(data,status,headers)
-            alert('Login error')
-      //.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
 
 })
       
@@ -44,7 +47,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             function(response){
                 console.log(response);
                                 $rootScope.all_cats=response;
-                                $state.go('app.login')
+         //                       $state.go('app.login')
             }
             
             ).error (

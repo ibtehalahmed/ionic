@@ -3,17 +3,17 @@ angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$s
     $timeout(function() {
      
     }, 0);
- ionicMaterialInk.displayEffect();
-
+    ionicMaterialInk.displayEffect();
+    
    
     $scope.login = function(user){
-
-        if (typeof user != "undefined" )
+        if (typeof user !== "undefined" )
         {
             var data = {
                 "email":user.email,
                 "password":user.password
             };
+            userModel.login(data);
 
     if (userModel.getAuthStatus() == true){
         userModel.check_user_type()
@@ -21,23 +21,7 @@ angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$s
         $state.go('app.login')
     }
 
-    /*userModel.login(data).then(function(){
-        
-        person=localStorage.getItem('auth');
-        parsePerson=JSON.parse(person);
-
-        if(parsePerson.usertype==1){
-            $state.go('app.profile');
-        }
-        if(parsePerson.usertype==0){
-
-            userModel.getcategories();
-           
-        }
-       
-    
-})
-      */
+   
  }
     else {
         $err="من فضلك أدخل الاسم و كلمة السر"

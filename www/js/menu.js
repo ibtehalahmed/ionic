@@ -90,7 +90,7 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
     
     $scope.logout = function(){
         userModel.logout();
-        $state.go('app.categories');
+        $state.go('app.login');
     
 }
 
