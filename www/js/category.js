@@ -3,28 +3,14 @@ angular.module('starter') .controller('CategoryController', function($scope,$roo
     $timeout(function() {
      
     }, 0);
+    $scope.$on('$ionicView.enter',function(){
     
-    $scope.getcategories= function(){
 
-        if (typeof user != "undefined" )
-        {
           
-    
-    userModel.getcategories().then(function(){
-    
+            userModel.getcategories()
 
-        
-        
-
-            userModel.getcategories();
-           
-        
-       
-    
-})
-        }
    
-    }
+    })
+    });
 
 
-})

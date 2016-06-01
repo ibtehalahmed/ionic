@@ -19,15 +19,22 @@
       </div>
              <div class="row">
              <div class="col">
-               &nbsp&nbsp&nbsp&nbsp <button class="button  button-dark" ng-click="login(user)">تسجيل الدخول</button>
-               <div>
-                  <a link ng-click="getcategories()">تخطي</a> 
-               </div>
-             <div id="error">
-             <div>
-       
+               &nbsp&nbsp <button class="button  button-dark" ng-click="login(user)">تسجيل الدخول</button>
+             </div>
+             <div class="col">
+            <button  class="button button-balanced link  ">تسجيل لأول مرة</button>
+             </div>
         
-
+        
+        
+        
+             
+        <div>
+             <a  ui-sref="app.categories">تخطي</a>
+        </div>
+             <div id="error">
+             </div>
+        
 
        <!-- <div class="button-bar social-login">
             <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
@@ -35,5 +42,5 @@
             <button class="button button-small button-border icon-left ion-social-facebook button-positive-900">Facebook</button>
         </div>-->
     </ion-content>
-    
+    </div>
 </ion-view>
