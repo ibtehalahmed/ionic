@@ -9,22 +9,25 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
 .run(function($ionicPlatform,$ionicPopup,$rootScope,$state,userModel) {
     $ionicPlatform.ready(function() {
         userModel.get_all_locations();
-               if ( userModel.getAuthStatus()){
-                   userModel.check_user_type();
-               }
+
+    if (userModel.getAuthStatus() == true){
+        userModel.check_user_type()
+    }else{
+        $state.go('app.login')
+    }
  // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 
         // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
+       
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
 
- 
-})
+        
+
+    });
+    
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -75,6 +78,34 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
+
+        .state('app.meals', {
+        url: '/meals',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/meals.html',
+                controller: 'mealsCtrl'
+            },
+            'fabContent': {
+                template: ''
+            }
+        }
+    })
+
+        .state('app.meal', {
+        url: '/meal',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/meal.html',
+                controller: 'mealCtrl'
+            },
+            'fabContent': {
+                template: ''
+            }
+        }
+    })
+
+
         .state('app.categories', {
         url: '/categories',
 
@@ -134,7 +165,7 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
                 controller: 'ProfileCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
+                template: '',
                 controller: function ($timeout) {
                     /*$timeout(function () {
                         document.getElementById('fab-profile').classList.toggle('on');

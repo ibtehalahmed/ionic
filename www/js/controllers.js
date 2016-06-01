@@ -91,70 +91,15 @@ angular.module('starter.controllers', [])
 })        
 
 
+ 
 
-.controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
-
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
-
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideInRight({
-            startVelocity: 3000
-        });
-    }, 700);
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-})
 
 .controller('OffersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-        $scope.$parent.showHeader();
-
-    
-    $scope.$parent.clearFabs();
-    $timeout(function() {
-        $scope.$parent.hideHeader();
-    }, 0);
-    ionicMaterialInk.displayEffect();
-
-})
-
-.controller('CategoryController', function($scope) {
+       
     $scope.$parent.showHeader();
-        $scope.$parent.clearFabs();
-    
-
-
-   
-
-
-
-  })
-
-  
-  
-
-
-
-
-
-
-
-.controller('AllOrdersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    
     $scope.$parent.clearFabs();
     $timeout(function() {
-        $scope.$parent.hideHeader();
+       // $scope.$parent.hideHeader();
     }, 0);
     ionicMaterialInk.displayEffect();
 
@@ -162,12 +107,42 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('SpecialOrderCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    
+
+
+ 
+.controller('AllOrdersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $timeout(function() {
-        $scope.$parent.hideHeader();
+       // $scope.$parent.hideHeader();
     }, 0);
+    ionicMaterialInk.displayEffect();
+
+})
+
+
+.controller('SpecialOrderCtrl', function($scope,$state,userModel,$http,$rootScope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    
+    $scope.submitSpecificOrder=function(sorder){
+        
+            var data = {
+                "name":sorder.name,
+                "quantity":sorder.quantity,
+                "description":sorder.description
+                
+            };
+    $rootScope.data = data;
+    console.log(data);
+          userModel.submitSpecificOrder(data).then(function(){
+              
+       $state.go('app.categories');
+    
+})
+
+    }
+    
     ionicMaterialInk.displayEffect();
 
 })

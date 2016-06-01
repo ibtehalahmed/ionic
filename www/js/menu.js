@@ -1,5 +1,6 @@
 angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope,$state,userModel, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
+   
     $scope.loginData = {};
     $scope.isExpanded = false;
     $scope.hasHeaderFabLeft = false;
@@ -86,29 +87,13 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
             fabs[0].remove();
         }
     };
-    $scope.getcats =function(){
-    return $http ({
-				method : 'GET',
-				url : 'http://localhost:8000/api/category',
-
-			}).success (
-			function(response){
-				console.log(response);
-                                $rootScope.all_cats=response;
-                                $state.go('app.categories')
-			}
-			
-			).error (
-			function(data,status,headers){
-				console.log('error');
-			}
-			)
-}
-$scope.logout = function(){
+    
+    $scope.logout = function(){
         userModel.logout();
         $state.go('app.categories');
     
 }
+userModel.getcategories();
 
 })        
 

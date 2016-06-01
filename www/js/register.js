@@ -2,7 +2,7 @@ angular.module('starter').controller('RegisterCtrl', function($scope,$http,$root
     
     $scope.$parent.clearFabs();
     $timeout(function() {
-        $scope.$parent.hideHeader();
+      
     }, 0);
     ionicMaterialInk.displayEffect();
 

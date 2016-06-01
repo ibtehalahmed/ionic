@@ -1,0 +1,13 @@
+<ion-view view-title="Meal">
+    <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
+        <div class="hero slide-up" style="background-image: url('img/checken.jpg');">
+            <div class="content">
+                <h3><a class="light">{{meal1.name}}</a></h3>
+            </div>
+        </div>
+        
+        <h1 ng-repeat="m in meal1">{{m.name }}</h1>
+         <h1 ng-repeat="m in meal1">{{m.price }}جنيه</h1>
+         
+    </ion-content>
+</ion-view>
