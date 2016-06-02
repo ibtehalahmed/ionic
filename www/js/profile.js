@@ -88,10 +88,12 @@
 };
 
  $scope.$on('$ionicView.enter',function(){
-     
+     person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+        id=parsePerson.id;
     return $http ({
                 method : 'GET',
-                url : 'http://localhost:8000/api/meals/u/6',
+                url : 'http://localhost:8000/api/meals/u/'+id,
             }).success (
             function(response){
                 console.log(response);

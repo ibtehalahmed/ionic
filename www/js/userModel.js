@@ -20,19 +20,9 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
      }
    
     }).error(function(data,status,headers){
-        console.log(data,status,headers)
-            alert('Login error')
-      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+       
+      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
         
-        //localStorage.setItem('auth',JSON.stringify(response));
-    
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
-
-     //person=localStorage.getItem('auth');
-       // parsePerson=JSON.parse(person);
-       // console.log(parsePerson.usertype);
-
 
 })
       
@@ -180,9 +170,12 @@ if (status !== undefined)
         
     }).success(function(response){
         console.log(response);
+          person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+        id=parsePerson.id;
             return $http ({
                 method : 'GET',
-                url : 'http://localhost:8000/api/meals/u/6',
+                url : 'http://localhost:8000/api/meals/u/'+id,
             }).success (
             function(response){
                 console.log(response);

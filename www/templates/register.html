@@ -4,7 +4,7 @@
         <div class="hero no-header flat">
             <div class="content">
                 <div class="app-icon"></div>
-                <h1>اطبخلي</h1>
+                <h1>إطبخلي</h1>
             </div>
         </div>
         <form name="myForm" novalidate>
@@ -27,8 +27,9 @@
               <input type="text" placeholder="العنوان*" ng-model="user.address" required>
           </label>
           <div class="list">
-            <label class="item item-input item-select " placeholder="المنطقة*">
+            <label class="item item-input item-select "  value=""placeholder="المنطقة*">
                 <select class="dark"ng-model="user.location" required>
+                    <option  value="" >--المنطقة*--</option>
                     <option ng-repeat="location in locations" value="{{location.name}}">
                     {{location.name}}
                     </option>
