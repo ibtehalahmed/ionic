@@ -4,16 +4,18 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
+angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-material','ionMdInput'])
 
 .run(function($ionicPlatform,$ionicPopup,$rootScope,$state,userModel) {
-
     $ionicPlatform.ready(function() {
-        if(window.Connection) { if(navigator.connection.type == Connection.NONE) { $ionicPopup.confirm({ title: "Internet Disconnected", content: "The internet is disconnected on your device." }) .then(function(result) { if(!result) { ionic.Platform.exitApp(); } }); } }
-               if ( userModel.getAuthStatus()){
-                   userModel.check_user_type()
-               }
- // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        userModel.get_all_locations();
+
+    if (userModel.getAuthStatus() == true){
+        userModel.check_user_type()
+    }else{
+        $state.go('app.login')
+    }
+ // Hide the accessory sbar by default (remove this to show the accessory bar above the keyboard
 
         // for form inputs)
        
@@ -21,11 +23,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+
         
 
     });
     
-
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {

@@ -1,25 +1,32 @@
-angular.module('starter').controller('RegisterCtrl', function($scope,$rootScope,$http,userModel,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+angular.module('starter').controller('RegisterCtrl', function($scope,$http,$rootScope,userModel,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     
     $scope.$parent.clearFabs();
     $timeout(function() {
       
     }, 0);
     ionicMaterialInk.displayEffect();
-    
+
     $scope.$on('$ionicView.enter',function(){
-        return $http({
-            method : 'GET',
-            url : 'http://localhost:8000/api/location'
-        }).success(
-                function(response){
+   return $http ({
+		     method : 'GET',
+	             url : 'http://localhost:8000/api/location',
+
+			}).success (
+			function(response){
+				//console.log(response);
                 $scope.locations=response;
-    }).error(function(data,status,headers){
-        
-    console.log('cannot get locations')
-        
-    })
-}),
+                   
+			}
+			
+			).error (
+			function(data,status,headers){
+				console.log('cannot get locations');
+			}
+			)  ;
+    
+  })
      $scope.register = function(user){
+
         if (typeof user !== "undefined" )
         {
             var register_data = {
@@ -29,20 +36,19 @@ angular.module('starter').controller('RegisterCtrl', function($scope,$rootScope,
                 "phone":user.phone,
                 "address":user.address,
                 "usertype":user.usertype,
-                "location":user.location,
+                "location":user.location
             };
+
     $rootScope.register_data = register_data
-    
     userModel.register(register_data).then(function(){
             $type=register_data.usertype;
-        userModel.check_user_type($type)
-      
-            
+            userModel.check_user_type($type)
 })
+
         }
-   
-         else {
-        $err="من فضلك تأكد من ادخال البيانات الصحيحة"
+            else {
+                if (myForm.user.name.$error.required == true)
+        $err="hello egghead"
         document.getElementById("error").innerHTML = $err;
 
     }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 angular.module('starter') .controller('mealsCtrl', function($scope,userModel, $timeout, $stateParams, ionicMaterialInk) {
-$scope.$parent.showHeader();
+    $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);

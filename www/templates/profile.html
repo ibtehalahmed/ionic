@@ -7,27 +7,29 @@
             </div>
         </div>
         <div class="tabs tabs-icon-top static my-color" >
-            <a ui-sref="app.activity" class="tab-item">
+            <a ui-sref="" class="tab-item">
                 <i class="icon ion-arrow-graph-up-right"></i> التعليقات
             </a>
-            <a ui-sref="app.friends" class="tab-item">
-                <i class="icon ion-android-people"></i> افضل الاكلات
+            <a ui-sref="" class="tab-item">
+                <i class="icon ion-android-people"></i> التقييم
             </a>
          
         </div>
-        
 
 
-        <div class="list">
+        <div class="list" ng-repeat="m in list_meals">
 
     <a class="item item-thumbnail-right" href="#">
       <img src="img/checken.jpg">
-      <h2>دجاج</h2>
-      <p>دجاج محمر بالطريقه الايطاليه</p>
+      <h2>{{m.name}}</h2>
+      <p>{{m.description}}</p>
+      <p>{{m.price}}LE</p>
+      
     </a>
 
 </div>
 
-<button id="fab-profile"  ng-click="showPopup()" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>
+<button id="fab-profile"  ng-click="showPopup()" ng-show="type" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>
+
     </ion-content>
 </ion-view>

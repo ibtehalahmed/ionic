@@ -1,4 +1,5 @@
 <ion-view view-title="Login" align-title="left">
+
     <ion-content style="background: url(img/bgg.png) center; background-size: cover;">
         <div class="hero no-header flat">
             <div class="content">
@@ -6,40 +7,53 @@
                 <h1>اطبخلي</h1>
             </div>
         </div>
-        
-        
-        
-        
-         <form ng-submit="login(user)">
+        <form name="f" novalidate="">
+             
+              <div class="row">
+                   <div class="col col-10"></div>
+               <div class="col col-80">
+                        <input type="text" placeholder="البريد الالكتروني" style="width: 320px" name="email" ng-model="user.email" required>
+                        <span style="color:red" ng-show="f.email.$error.required">
+                             *مطلوب
+                        </span>
+                </div>
+                </div>
+            <div class="row">
+                   <div class="col col-10"></div>
+               <div class="col col-80">
+                        <input type="password" placeholder="كلمة السر" style="width: 320px" name="password" ng-model="user.password" required>
+                        <span style="color:red" ng-show="f.password.$error.required">
+                             *مطلوب
+                        </span>
+                </div>
+                </div>
 
-        <div class="list">
-             <label class="item item-input">
-                    <span class="input-label">الايميل</span>
-                    <input type="email" name="email" ng-model="user.email" required>
-                    <p ng-show="f.email.$error.required">*مطلوب</p>
-                </label>
-            
-            <label class="item item-input">
-                    <span class="input-label">كلمة المرور</span>
-                    <input type="password" name="password" ng-model="user.password" required>
-                    <p ng-show="f.password.$error.required">*مطلوب</p>
-                </label>
-            </div>
-        <div class="padding row">
-            <div class="col">
-            <button  class="button button-balanced link  ">تسجيل الدخول</button>
-            </div>
-            <div class="col">
-            <button  class="button button-balanced link  ">تسجيل لأول مرة</button>
-            </div>
-        </div>
-             <a ng-click="getcategories()">تخطي</a>             <div id="error">
-             </div>
+
+             
+
+             
+               
+             
          </form>
+        <div class="padding">
+        <button class="button button-full button-energized-900 link" ng-click="login(user)">تسجيل الدخول</button>
+        </div>
+        <div class="padding">
+        <button  class="button button-full button-energized-900 link  ">تسجيل لأول مرة</button>
+        </div>
+             
+        <div>
+             <a  ui-sref="app.categories">تخطي</a>
+        </div>
+             <div id="error">
+             </div>
+        
+
        <!-- <div class="button-bar social-login">
             <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
             <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
             <button class="button button-small button-border icon-left ion-social-facebook button-positive-900">Facebook</button>
         </div>-->
     </ion-content>
+   
 </ion-view>

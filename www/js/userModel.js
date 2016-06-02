@@ -1,4 +1,4 @@
-angular.module('starter').factory('userModel',function( $rootScope,$http,$state){
+angular.module('starter').factory('userModel',function($http,$state,$rootScope){
   return {
             'login' : function(data){
            return $http({
@@ -9,17 +9,30 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
               "password":data.password
         }
     }).success(function(response){
-        console.log(response);
-        localStorage.setItem('auth',JSON.stringify(response));
-     person=localStorage.getItem('auth');
-        parsePerson=JSON.parse(person);
-        console.log(parsePerson.usertype);
-        
-        window.localStorage.setItem("password", response.usertype);  
+    console.log(response);    
+    localStorage.setItem('auth',JSON.stringify(response));
+     if (response.usertype == 1){
+         console.log('user is chef');
+         $state.go('app.profile')
+     }
+     else{
+         $state.go('app.categories')
+     }
+   
     }).error(function(data,status,headers){
         console.log(data,status,headers)
-            alert('Login error')
-      //.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+          //  alert('Login error')
+      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+        
+        //localStorage.setItem('auth',JSON.stringify(response));
+    
+      //  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+
+     //person=localStorage.getItem('auth');
+       // parsePerson=JSON.parse(person);
+       // console.log(parsePerson.usertype);
+
 
 })
       
@@ -34,7 +47,7 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
             function(response){
                 console.log(response);
                                 $rootScope.all_cats=response;
-                                $state.go('app.categories')
+         //                       $state.go('app.login')
             }
             
             ).error (
@@ -71,6 +84,8 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
 
 
 'register' : function(register_data){
+    console.log('registeration');
+    console.log(register_data)
            return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/register',
@@ -82,29 +97,34 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
                 "phone":register_data.phone,
                 "address":register_data.address,
                 "usertype":register_data.usertype,
-                "location":register_data.location,
+                "location" :register_data.location,
             }
         
     }).success(function(response){
         console.log(response);
-        localStorage.setItem('auth',response);    
+
+        localStorage.setItem('auth',JSON.stringify(response));
+        //  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+
     }).error(function(data,status,headers){
-        console.log(data,status,headers)
-            alert('Login error')
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال البيانات الصحيحة";
 })
       
 },
-//check if cookie is set or not and return true or false accordingly
 'getAuthStatus' : function(){
+    
     var status = localStorage.getItem('auth');
-
-    if (status){
-   return true 
+if (status !== undefined)
+{
+    if (status){    
+   return true
+   
     }
         else {
       return false      
     }
+}
 },
 
  'logout' : function(){
@@ -122,13 +142,30 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
          $state.go('app.categories')
      }
  },
+'get_all_locations' : function(){
+           return $http({
+              method: 'GET',
+              url: 'http://localhost:8000/api/location',
+
+    }).success(function(response){
+      //  console.log(response);
+        $rootScope.locations=response;
+    }).error(function(data,status,headers){
+        //console.log(data,status,headers)
+           // alert('Login error')
+  document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+
+})
+      
+}
+  ,
  'myPopup': function(meal){
    //console.log(localStorage.getItem('auth'));
     person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
      //console.log(parsePerson.id);
      return $http({
-         method: 'POST',
+              method: 'POST',
               url: 'http://localhost:8000/api/user/addmeal',
               data: {
               
@@ -143,11 +180,27 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
         
     }).success(function(response){
         console.log(response);
-      //  window.localStorage.setItem("email", response.email);
+         person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     id=parsePerson.id;
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/'+id,
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+//  window.localStorage.setItem("email", response.email);
         //window.localStorage.setItem("password", response.password);   
     }).error(function(data,status,headers){
-        console.log(data,status,headers)
-            alert('cannot insert meal')
+       // console.log(data,status,headers)
+         //   alert('cannot insert meal')
       //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
 
 }) 
@@ -156,7 +209,7 @@ angular.module('starter').factory('userModel',function( $rootScope,$http,$state)
      
      
  },
-
+ 
        'submitSpecificOrder' :function(data)
        {
            

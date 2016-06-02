@@ -1,21 +1,24 @@
 <ion-side-menus enable-menu-with-back-views="true">
     <ion-side-menu-content>
+           
+          
         <ion-nav-bar class="my-color" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
             <ion-nav-back-button class="no-text">
             </ion-nav-back-button>
             <ion-nav-buttons side="right">
 
-                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right"ng-click="checkAuth()">
+                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right"ng-click="checkAuth(); checkType();">
 
                 </button>
             </ion-nav-buttons>
+
         </ion-nav-bar>
         <ion-nav-view name="fabContent"></ion-nav-view>
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
-            <span class="avatar" style="background: url('/img/logo1.jpg'); background-size: cover;"></span>
+            <span class="avatar" style="background: url('/img/logor.jpg'); background-size: cover;"></span>
             <h2>اطبخلى</h2>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
@@ -25,7 +28,7 @@
 
                 تسجيل الدخول
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.profile">
+                <ion-item nav-clear menu-close ng-show="type" ui-sref="app.profile">
                     شيف بروفايل
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.offers">
