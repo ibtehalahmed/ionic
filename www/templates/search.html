@@ -1,0 +1,26 @@
+ <body ng-controller="searchCtrl">
+    <ion-header-bar class="bar-positive">
+      <h1 class="title"> Contacts</h1>
+    </ion-header-bar>
+    <ion-header-bar class="bar-light bar-subheader">
+              <i class="icon ion-android-search placeholder-icon"></i>
+      <input type="search"
+        placeholder="Filter contacts..."
+        ng-model="search">
+      <button ng-if="search.length"
+        class="button button-icon ion-android-close input-button"
+        ng-click="clearSearch()">
+      </button>
+    </ion-header-bar>
+    <ion-content>
+    <div class="list" ng-if="search.length">
+        <a class="item my-item"
+          collection-repeat="item in contacts | orderBy:'name' | searchContacts:search"
+          collection-item-height="60"
+          collection-item-width="'100%'">
+          
+          {{item.id+' '+item.name}}
+        </a>
+      </div>
+    </ion-content>
+  </body>

@@ -23,6 +23,7 @@ angular.module('starter').controller('RegisterCtrl', function($scope,$http,$root
         $type=register_data.usertype;
         userModel.check_user_type($type)        
         })
+   
         }
             else {
                 if (myForm.user.name.$error.required == true)

@@ -2,29 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/var/www/html/new/ionic/www/js/app.js</file>
-            <file>file:/var/www/html/new/ionic/www/index.html</file>
-            <file>file:/var/www/html/new/ionic/www/templates/login1.html</file>
-            <file>file:/var/www/html/new/ionic/www/js/register.js</file>
-            <file>file:/var/www/html/new/ionic/www/templates/categories.html</file>
-            <file>file:/var/www/html/new/ionic/www/templates/profile.html</file>
-            <file>file:/var/www/html/new/ionic/www/templates/menu.html</file>
-            <file>file:/var/www/html/new/ionic/www/templates/register.html</file>
-            <file>file:/var/www/html/new/ionic/www/js/controllers.js</file>
-            <file>file:/var/www/html/new/ionic/www/js/userModel.js</file>
-=======
-            <file>file:/var/www/html/new1/ionic1/www/js/app.js</file>
-            <file>file:/var/www/html/new1/ionic1/www/templates/meals.html</file>
-            <file>file:/var/www/html/new1/ionic1/www/js/controllers.js</file>
-            <file>file:/var/www/html/new1/ionic1/www/templates/categories.html</file>
-            <file>file:/var/www/html/new1/ionic1/www/js/meals.js</file>
-            <file>file:/var/www/html/new1/ionic1/www/js/userModel.js</file>
-            <file>file:/var/www/html/new1/ionic1/www/js/meal.js</file>
-            <file>file:/var/www/html/new1/ionic1/www/templates/meal.html</file>
-            <file>file:/var/www/html/new1/ionic1/www/templates/login.html</file>
->>>>>>> 259c45e95dd8f66321560ae2a235920e5a983176
-        </group>
+        <group/>
     </open-files>
 </project-private>

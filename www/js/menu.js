@@ -1,4 +1,4 @@
-angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope,$state,userModel, $ionicModal, $ionicPopover, $timeout) {
+angular.module('starter').controller('AppCtrl', function($ionicScrollDelegate,$scope,$http,$rootScope,$state,userModel, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
    
     $scope.loginData = {};
@@ -97,27 +97,30 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
 {"id":3,"name":"غادة"},
 ]
   
-  $scope.clearSearch = function() {
-    $scope.search = '';
-  };
+
+  $scope.checkType=function(){
+    $rootScope.type=false;
+  
+           if(typeof(localStorage.getItem('auth')) !== "object" ){
+
+                  person=localStorage.getItem('auth');       
+                  parsePerson=JSON.parse(person);
+                  $types= parsePerson.usertype;
+                  if ($types == 1){ 
+                      $types=true;
+                      $rootScope.type=$types;
+                     } 
+                  if ($types == 0){ 
+                      $types=false;
+                      $rootScope.type=$types;
+                     } 
+                
+                   
+}
+};
+
+
 })
 
-.filter('searchContacts', function(){
-  return function (items, query) {
-    var filtered = [];
-    var letterMatch = new XRegExp(query, 'i');
 
-    //var letterMatch = new RegExp(query, 'i');//'i' is a flag to ignore case
-    for (var i = 0; i < items.length; i++) {
-      var item = items[i];
-      if (query) {
-        if (letterMatch.test(item.name.substring(0, query.length))) {
-          filtered.push(item);
-        }
-      } 
-    }
-    return filtered;
-  };
  
-
-  });

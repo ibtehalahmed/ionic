@@ -65,10 +65,11 @@ p {
 ==================================*/
 .app-icon {
     background-color: #fff;
-    background: url('../img/logo1.jpg') center;
+    background: url('../img/logor.jpg') center;
     background-size: cover;
     border-radius: 50%;
     height: 125px;
+    marin-top:-50 px;
     margin: 0 auto;
     width: 125px;
 }
@@ -84,6 +85,10 @@ p {
 
 .my-color{
 background-color:orange !important;
+}
+
+.hero {
+    margin-top: 30px;
 }
 
 

@@ -1,8 +1,41 @@
 <ion-view view-title=" الاصناف">
-    
-    <ion-content ng-class="{expanded:$scope.isExpanded} " style="background: url(img/bgg.png) center; background-size: cover;">
-    
-       <h4 class="content padding double-padding-x">الاصناف</h4>
+     
+      
+    <ion-header-bar class="bar-light bar-subheader">
+
+
+      <button 
+        class="button button-icon ion-android-search input-button"
+         ng-model="clicked" ng-click="check_search_clicked()" ng-hide="type">
+      </button>
+      <button ng-if="search.length"
+        class="button button-icon ion-android-close input-button"
+        ng-click="clearSearch()">
+      </button>
+      <label class="item item-input">
+      
+      <input type="search" ng-show="clicked"
+        placeholder="أدخل موقعك للبحث عن أقرب طباخ"
+        ng-model="search">
+
+      </label>
+    </ion-header-bar>
+    <ion-content>
+    <div class="list" ng-if="search.length">
+        <a class="item my-item"
+          collection-repeat="item in locations | orderBy:'name' | searchContacts:search"
+          collection-item-height="60"
+          collection-item-width="'100%'">
+          
+          {{item.id+' '+item.name}}
+        </a>
+      </div>
+    </ion-content>
+ 
+    <br>
+    <br>
+    <br>
+    <br>
 
        <div class="list" ng-repeat="c in all_cats">
          <a class="item item-thumbnail-right" ui-sref="app.meals">

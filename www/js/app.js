@@ -15,7 +15,7 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
     }else{
         $state.go('app.login')
     }
- // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+ // Hide the accessory sbar by default (remove this to show the accessory bar above the keyboard
 
         // for form inputs)
        
@@ -48,10 +48,6 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
     })
-
-
-
-  
 
 
     .state('app.login', {
@@ -176,9 +172,5 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
-    ;
-
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/login');
-
-});
+})
+   

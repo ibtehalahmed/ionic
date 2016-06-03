@@ -10,19 +10,22 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
               "password":data.password
         }
     }).success(function(response){
-        localStorage.setItem('auth',JSON.stringify(response));
+    console.log(response);    
+    localStorage.setItem('auth',JSON.stringify(response));
+     if (response.usertype == 1){
+         console.log('user is chef');
+         $state.go('app.profile')
+     }
+     else{
+         $state.go('app.categories')
+     }
    
     }).error(function(data,status,headers){
+       
         console.log(data,status,headers)
-            alert('Login error')
-      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
-        console.log(response);
-        localStorage.setItem('auth',JSON.stringify(response));
-
-
-    }).error(function(data,status,headers){
-        console.log(data,status,headers)
-      getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+       
+      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+        
 
 })
       
@@ -37,6 +40,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             function(response){
                 console.log(response);
                 $rootScope.all_cats=response;
+
             }
             
             ).error (
@@ -88,7 +92,10 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
         
     }).success(function(response){
         console.log(response);
-        localStorage.setItem('auth',JSON.stringify(response));    
+
+        localStorage.setItem('auth',JSON.stringify(response));
+          
+
     }).error(function(data,status,headers){
       document.getElementById("error").innerHTML = "يرجي التأكد من ادخال البيانات الصحيحة";
 })
@@ -141,7 +148,6 @@ return $http ({
  'myPopup': function(meal){
         person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
-     //console.log(parsePerson.id);
      return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/user/addmeal',
@@ -158,13 +164,33 @@ return $http ({
         
     }).success(function(response){
         console.log(response);
-          }).error(function(data,status,headers){
-        console.log(data,status,headers)
-            alert('cannot insert meal')
 
+          person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+        id=parsePerson.id;
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/'+id,
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+  
+    }).error(function(data,status,headers){
+       
 }) 
-
+     
+     
+     
+     
  },
+ 
 //10-add specific order
  'submitSpecificOrder' :function(data)
        {
