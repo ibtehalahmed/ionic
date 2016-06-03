@@ -50,19 +50,17 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             )
 },
 //3-get meal by id 
-'get_meal' :function(){
+'get_meal' :function($id){
     console.log("from mealCtrl to user model");
     return $http ({
                 method : 'GET',
-                url : 'http://localhost:8000/api/meal/1',
+                url : "http://localhost:8000/api/meal/"+$id,
 
             }).success (
             function(response){
-               // console.log(response);
-                                $rootScope.meal1=response;
-                                console.log('your object returned successfully');
-                                console.log($rootScope.meal1);
-                                $state.go('app.meal');
+               $rootScope.meal1=response[0]
+                  console.log('factory')
+                  console.log($rootScope.meal1)
             }
             
             ).error (
@@ -185,10 +183,7 @@ return $http ({
     }).error(function(data,status,headers){
        
 }) 
-     
-     
-     
-     
+  
  },
  
 //10-add specific order
@@ -224,7 +219,7 @@ return $http ({
             function(response){
                 console.log(response);
                 $rootScope.all_meals=response;
-                $state.go('app.meals')
+              //  $state.go('app.meals')
             }
             
             ).error (
@@ -233,5 +228,24 @@ return $http ({
             }
             )
        }     
+,
+//12-get chef data by id 
+'get_chef': function($id){
+    return $http ({
+                method : 'GET',
+                url : "http://localhost:8000/api/user/"+$id,
+
+            }).success (
+            function(response){
+               $rootScope.user=response[0]
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+    
 }
+  }
 });

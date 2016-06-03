@@ -27,13 +27,16 @@
     }, 700);
 
        $scope.$on('$ionicView.enter',function(){
-
            person=localStorage.getItem('auth'); 
            if(typeof(person) != "undefined" ){
                parsePerson=JSON.parse(person);
                     $type= parsePerson.usertype;
                     console.log($type);
                     $scope.type=$type;
+                    if ($type !== 1){
+                      userModel.get_chef($id);
+ 
+                    }
 }  
        }) 
       

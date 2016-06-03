@@ -91,7 +91,8 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
     })
 
         .state('app.meal', {
-        url: '/meal',
+        url: '/meal/:id',
+        
         views: {
             'menuContent': {
                 templateUrl: 'templates/meal.html',
@@ -155,6 +156,21 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
+    /*.state('app.chefsLocation', {
+        url: '/chefs',
+       params: { loc_id: { value: item.id } },
+
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/chefs.html',
+                controller: 'chefsCtrl'
+            },
+            
+            'fabContent': {
+                template: ''
+            }
+        }
+    })*/
     .state('app.profile', {
         url: '/profile',
         views: {

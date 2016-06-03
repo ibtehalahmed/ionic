@@ -3,31 +3,56 @@
       
     <ion-header-bar class="bar-light bar-subheader">
 
+        <label>
 
       <button 
         class="button button-icon ion-android-search input-button"
          ng-model="clicked" ng-click="check_search_clicked()" ng-hide="type">
       </button>
-      <button ng-if="search.length"
+
+        </label>
+      <button ng-if="search.length && clicked""
         class="button button-icon ion-android-close input-button"
         ng-click="clearSearch()">
       </button>
-      <label class="item item-input">
+       <button ng-if="search1.length && clicked""
+        class="button button-icon ion-android-close input-button"
+        ng-click="clearSearch()">
+      </button> 
+      <label class="item item-input " ng-show="clicked" ng-hide="search1.length">
       
-      <input type="search" ng-show="clicked"
-        placeholder="أدخل موقعك للبحث عن أقرب طباخ"
+      <input type="search" 
+        placeholder="أدخل منطقتك لتجد أقرب الطباخين"
         ng-model="search">
+      </label>
+      <label class="item item-input " ng-show="clicked" ng-hide="search.length">
 
+      <input type="search" " 
+        placeholder="ابحث عن وجبة"
+        ng-model="search1" >
       </label>
     </ion-header-bar>
     <ion-content>
     <div class="list" ng-if="search.length">
         <a class="item my-item"
-          collection-repeat="item in locations | orderBy:'name' | searchContacts:search"
+          collection-repeat="item in locations | orderBy:'name' | searchItems:search"
           collection-item-height="60"
-          collection-item-width="'100%'">
+          collection-item-width="'100%'"
+          ui-sref="app.profile({ id: item.id })">
           
-          {{item.id+' '+item.name}}
+          {{item.name}}
+        </a>
+      </div>
+    </ion-content>
+    <ion-content>
+    <div class="list" ng-if="search1.length">
+        <a class=" link item my-item" 
+          collection-repeat="item in all_meals | orderBy:'name' | searchItems:search1"
+          collection-item-height="60"
+          collection-item-width="'100%'" 
+          >
+          
+          {{item.name}}
         </a>
       </div>
     </ion-content>
@@ -36,8 +61,10 @@
     <br>
     <br>
     <br>
+    <br>
+    
 
-       <div class="list" ng-repeat="c in all_cats">
+       <div class="list" ng-repeat="c in all_cats" ng-hide="clicked">
          <a class="item item-thumbnail-right" ui-sref="app.meals">
            <img src="img/checken.jpg">
            <h2>{{c.name}}</h2>

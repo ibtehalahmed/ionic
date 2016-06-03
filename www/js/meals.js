@@ -16,8 +16,11 @@ angular.module('starter') .controller('mealsCtrl', function($scope,userModel, $t
    
     
     ionicMaterialInk.displayEffect();
-   userModel.get_meals();
+    userModel.get_meals();
+    $scope.get_meal = function($id){
+      userModel.get_meal($id);
 
+}
 })
 
 

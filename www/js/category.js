@@ -6,29 +6,32 @@ angular.module('starter') .controller('CategoryController', function($ionicScrol
     $scope.$on('$ionicView.enter',function(){
             userModel.getcategories();
             userModel.get_all_locations();
+            userModel.get_meals();
+            $scope.clicked=false;
 
-            
             
     })
 
     $scope.clearSearch = function() {
-        console.log($scope.search)
-    $scope.search = '';}
+    $scope.search = '';
+    $scope.search1='';
+    }
     $scope.check_search_clicked =function(){
         if($scope.clicked === true){
             $scope.clicked=false;
         }else{
         $scope.clicked=true
         };
-        console.log($scope.clicked);
+                $scope.all_meals = $rootScope.all_meals
+
     }
 })
-    .filter('searchContacts', function(){
+//this filter is used to search array of locations and meals
+    .filter('searchItems', function(){
   return function (items, query) {
     var filtered = [];
     var letterMatch = new XRegExp(query, 'i');
 
-    //var letterMatch = new RegExp(query, 'i');//'i' is a flag to ignore case
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
       if (query) {
@@ -39,9 +42,8 @@ angular.module('starter') .controller('CategoryController', function($ionicScrol
     }
     return filtered;
   };
+    });
 
-  
-})
     
-    
+
 
