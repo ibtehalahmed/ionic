@@ -7,7 +7,7 @@
         angular.module('starter').controller('ProfileCtrl', function($scope ,$ionicPopup,userModel,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     // Set Header
    
-            /*$scope.$parent.showHeader();
+    $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
@@ -64,7 +64,7 @@
 //   });
 
 
-};*/
+};
 });
 //$scope.add_meal =function(meal){
   //  userModel.add_meal(meal);

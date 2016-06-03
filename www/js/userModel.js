@@ -1,5 +1,6 @@
 angular.module('starter').factory('userModel',function($http,$state,$rootScope){
   return {
+      //1-login function
             'login' : function(data){
            return $http({
               method: 'POST',
@@ -17,20 +18,17 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
       //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
         console.log(response);
         localStorage.setItem('auth',JSON.stringify(response));
-     person=localStorage.getItem('auth');
-        parsePerson=JSON.parse(person);
-        console.log(parsePerson.usertype);
+
 
     }).error(function(data,status,headers){
         console.log(data,status,headers)
-            alert('Login error')
-      //.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+      getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
 
 })
       
 },
-
-        'getcategories' :function(){    
+//2-get all categories
+ 'getcategories' :function(){    
     return $http ({
                 method : 'GET',
                 url : 'http://localhost:8000/api/category',
@@ -38,8 +36,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             }).success (
             function(response){
                 console.log(response);
-                                $rootScope.all_cats=response;
-                                //$state.go('app.categories')
+                $rootScope.all_cats=response;
             }
             
             ).error (
@@ -48,7 +45,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             }
             )
 },
-
+//3-get meal by id 
 'get_meal' :function(){
     console.log("from mealCtrl to user model");
     return $http ({
@@ -71,10 +68,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             )
 },
 
-
-
-
-
+//4-register user
 'register' : function(register_data){
     console.log('registeration');
     console.log(register_data)
@@ -100,27 +94,26 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
 })
       
 },
+//5-check if user is authenticated
 'getAuthStatus' : function(){
     
     var status = localStorage.getItem('auth');
-if (status !== undefined)
-{
-    if (status){    
-   return true
-   
-    }
-        else {
-      return false      
-    }
-}
-},
+        if (status !== undefined)
+        {
+            if (status){    
+           return true
 
+            }
+                else {
+              return false      
+            }
+        }
+},
+//6-logout user
  'logout' : function(){
              localStorage.removeItem('auth');
-            
-             
  },
- 
+ //7-check if user type is customer or chef
  'check_user_type' : function($type){
      if ($type == 1){
          console.log('user is chef');
@@ -130,26 +123,23 @@ if (status !== undefined)
          $state.go('app.categories')
      }
  },
+ //8-get all locations
 'get_all_locations' : function(){
-           return $http({
-              method: 'GET',
-              url: 'http://localhost:8000/api/location',
+return $http ({
+		     method : 'GET',
+	             url : 'http://localhost:8000/api/location',
 
-    }).success(function(response){
-      //  console.log(response);
-        $rootScope.locations=response;
-    }).error(function(data,status,headers){
-        //console.log(data,status,headers)
-           // alert('Login error')
-  //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
-
-})
-      
-}
-  ,
+			}).success (
+			function(response){
+                            $rootScope.locations=response;
+                   	}).error (
+			function(data,status,headers){
+		            console.log('cannot get locations');
+			});
+},
+//9-add meal by popup
  'myPopup': function(meal){
-   //console.log(localStorage.getItem('auth'));
-    person=localStorage.getItem('auth');
+        person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
      //console.log(parsePerson.id);
      return $http({
@@ -168,24 +158,17 @@ if (status !== undefined)
         
     }).success(function(response){
         console.log(response);
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
-    }).error(function(data,status,headers){
+          }).error(function(data,status,headers){
         console.log(data,status,headers)
             alert('cannot insert meal')
-      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
 
 }) 
-     
-     
-     
-     
- },
 
-       'submitSpecificOrder' :function(data)
+ },
+//10-add specific order
+ 'submitSpecificOrder' :function(data)
        {
-           
-                    return $http({
+           return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/specificorder',
               data: {
@@ -197,17 +180,16 @@ if (status !== undefined)
                 }        
     }).success(function(response){
         console.log(response);
-       // localStorage.setItem('auth',response);
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+        
     }).error(function(data,status,headers){
         console.log(data,status,headers)
       document.getElementById("error").innerHTML = "من فضلك املا كل البيانات";
 
 })
-       },
-       'get_meals' :function(){
-           
+},
+//11-get all meals
+'get_meals' :function(){
+         
                return $http ({
                 method : 'GET',
                 url : 'http://localhost:8000/api/meal',
@@ -215,8 +197,8 @@ if (status !== undefined)
             }).success (
             function(response){
                 console.log(response);
-                                $rootScope.all_meals=response;
-                                $state.go('app.meals')
+                $rootScope.all_meals=response;
+                $state.go('app.meals')
             }
             
             ).error (
@@ -224,18 +206,6 @@ if (status !== undefined)
                 console.log('error');
             }
             )
-           
-           
-       }
-       
-
-        
-        
-        
-  /*      
-    */    
-        
-        
+       }     
 }
-
 });

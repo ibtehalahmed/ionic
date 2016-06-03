@@ -4,13 +4,9 @@ angular.module('starter') .controller('CategoryController', function($scope,$roo
      
     }, 0);
     $scope.$on('$ionicView.enter',function(){
-    
-
-          
             userModel.getcategories()
-
-   
     })
+
     });
 
 

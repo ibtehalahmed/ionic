@@ -12,7 +12,7 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
             this.classList.toggle('active');
         });
     }
-
+ 
     ////////////////////////////////////////
     // Layout Methods
     ////////////////////////////////////////
@@ -33,11 +33,7 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
             }
         }
     };
-    $scope.checkAuth = function(){
-     check = userModel.getAuthStatus();
-        console.log(check);
-        $rootScope.check=check;   
-    }
+    
     $scope.setExpanded = function(bool) {
         $scope.isExpanded = bool;
         console.log( $scope.isExpanded);
@@ -87,13 +83,41 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
             fabs[0].remove();
         }
     };
-    
+    $scope.checkAuth = function(){
+     check = userModel.getAuthStatus();
+        console.log(check);
+        $rootScope.check=check;   
+    };
     $scope.logout = function(){
-        userModel.logout();
-        $state.go('app.categories');
-    
-}
-userModel.getcategories();
+        userModel.logout();    
+    };
+    $scope.contacts =  [
+    {"id":1,"name":"أحمد"},
+{"id":2,"name":"أسماء"},
+{"id":3,"name":"غادة"},
+]
+  
+  $scope.clearSearch = function() {
+    $scope.search = '';
+  };
+})
 
-})        
+.filter('searchContacts', function(){
+  return function (items, query) {
+    var filtered = [];
+    var letterMatch = new XRegExp(query, 'i');
 
+    //var letterMatch = new RegExp(query, 'i');//'i' is a flag to ignore case
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      if (query) {
+        if (letterMatch.test(item.name.substring(0, query.length))) {
+          filtered.push(item);
+        }
+      } 
+    }
+    return filtered;
+  };
+ 
+
+  });

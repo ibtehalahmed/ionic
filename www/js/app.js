@@ -34,6 +34,8 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
 
     // Turn off caching for demo simplicity's sake
     $ionicConfigProvider.views.maxCache(0);
+    //$ionicFilterBarConfigProvider.clear('ion-ios-close-empty');
+
 
     /*
     // Turn off back button text
