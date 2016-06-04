@@ -237,7 +237,25 @@ return $http ({
 
             }).success (
             function(response){
-               $rootScope.user=response[0]
+               $rootScope.chef=response[0]
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+    
+},
+//13-get chefs by location
+'get_chefs_by_location': function($id){
+    return $http ({
+                method : 'GET',
+                url : "http://localhost:8000/api/chefs/"+$id,
+
+            }).success (
+            function(response){
+               $rootScope.chefs=response
             }
             
             ).error (
@@ -247,5 +265,8 @@ return $http ({
             )
     
 }
+
+
   }
+  
 });

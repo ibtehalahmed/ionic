@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-        angular.module('starter').controller('ProfileCtrl', function($scope ,$http,$ionicPopup,$rootScope ,userModel,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+        angular.module('starter').controller('ProfileCtrl', function($stateParams,$scope ,$http,$ionicPopup,$rootScope ,userModel,$state,$timeout, ionicMaterialMotion, ionicMaterialInk) {
     // Set Header
    
     $scope.$parent.showHeader();
@@ -27,17 +27,28 @@
     }, 700);
 
        $scope.$on('$ionicView.enter',function(){
+           if (localStorage.getItem('auth')){
+               
            person=localStorage.getItem('auth'); 
            if(typeof(person) != "undefined" ){
                parsePerson=JSON.parse(person);
                     $type= parsePerson.usertype;
                     console.log($type);
-                    $scope.type=$type;
-                    if ($type !== 1){
-                      userModel.get_chef($id);
- 
-                    }
-}  
+                    $scope.type=$type;}
+                    
+                    if ($type == 0){
+                      $id=$stateParams.id
+
+                      userModel.get_chef($id);}
+ else{
+  $id=parsePerson.id
+  userModel.get_chef($id);
+ }
+ }else{  
+               $id=$stateParams.id
+               userModel.get_chef($id);            
+           }
+           
        }) 
       
      ionicMaterialInk.displayEffect();
@@ -69,34 +80,6 @@
    });
 
 };
-
- $scope.$on('$ionicView.enter',function(){
-     person=localStorage.getItem('auth');
-        parsePerson=JSON.parse(person);
-        id=parsePerson.id;
-    return $http ({
-                method : 'GET',
-                url : 'http://localhost:8000/api/meals/u/'+id,
-            }).success (
-            function(response){
-                console.log(response);
-                                $rootScope.list_meals=response;
-                            }
-            
-            ).error (
-            function(data,status,headers){
-                console.log('error');
-            }
-            )
-}
-        );
-$scope.$on('$ionicView.enter',function(){
-   userModel.getcategories()
-})
-
-
-
-
 
 });
 

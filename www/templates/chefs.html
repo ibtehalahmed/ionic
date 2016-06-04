@@ -1,0 +1,12 @@
+
+<ion-view view-title="الشيفات">
+    <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
+    
+
+       <ion-list ng-repeat="m in chefs">
+         <ion-item ui-sref="app.profile({ id: m.id })">
+           {{m.name}}
+        </ion-item>
+       </ion-list>
+    </ion-content>
+</ion-view>

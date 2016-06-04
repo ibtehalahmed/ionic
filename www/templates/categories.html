@@ -1,62 +1,69 @@
 <ion-view view-title=" الاصناف">
      
-      
-    <ion-header-bar class="bar-light bar-subheader">
+    <ion-header-bar align-title="center" class="bar bar-subheader custom bar-energized"  ng-hide="type">
 
         <label>
-
+            
       <button 
         class="button button-icon ion-android-search input-button"
-         ng-model="clicked" ng-click="check_search_clicked()" ng-hide="type">
+         ng-model="clicked" ng-click="check_search_clicked()">
       </button>
+اضغط للبحث      
 
         </label>
-      <button ng-if="search.length && clicked""
-        class="button button-icon ion-android-close input-button"
-        ng-click="clearSearch()">
-      </button>
-       <button ng-if="search1.length && clicked""
-        class="button button-icon ion-android-close input-button"
-        ng-click="clearSearch()">
-      </button> 
-      <label class="item item-input " ng-show="clicked" ng-hide="search1.length">
-      
-      <input type="search" 
-        placeholder="أدخل منطقتك لتجد أقرب الطباخين"
-        ng-model="search">
-      </label>
-      <label class="item item-input " ng-show="clicked" ng-hide="search.length">
-
-      <input type="search" " 
-        placeholder="ابحث عن وجبة"
-        ng-model="search1" >
-      </label>
     </ion-header-bar>
-    <ion-content>
-    <div class="list" ng-if="search.length">
-        <a class="item my-item"
+     
+   <ion-content>
+
+        
+
+       <div>
+       <label class="item item-input " ng-show="clicked" ng-hide="search1.length">
+           
+        <input type="search" 
+          placeholder="أدخل منطقتك لتجد أقرب الطباخين"
+          ng-model="search">
+        <!--<button ng-if="search.length && clicked"
+          class="button button-icon ion-android-close input-button"
+          ng-click="clearSearch()">
+        </button>-->
+      </label>
+
+     </div>
+        <div>
+           <label class="item item-input " ng-show="clicked" ng-hide="search.length">
+            <input type="search" 
+            placeholder="ابحث عن وجبة"
+            ng-model="search1">
+            <!--<button ng-if="search1.length && clicked"
+                class="button button-icon ion-android-close input-button"
+                ng-click="clearSearch()">
+            </button>--> 
+          </label>
+       </div>
+    <ion-list ng-if="search.length" >
+        <ion-item  
           collection-repeat="item in locations | orderBy:'name' | searchItems:search"
           collection-item-height="60"
-          collection-item-width="'100%'"
-          ui-sref="app.profile({ id: item.id })">
-          
-          {{item.name}}
-        </a>
-      </div>
-    </ion-content>
-    <ion-content>
-    <div class="list" ng-if="search1.length">
-        <a class=" link item my-item" 
-          collection-repeat="item in all_meals | orderBy:'name' | searchItems:search1"
-          collection-item-height="60"
-          collection-item-width="'100%'" 
+          collection-item-width="100%"
+          ui-sref="app.chefs({ id: item.id })" align="right"
           >
-          
           {{item.name}}
-        </a>
-      </div>
+        </ion-item>
+    </ion-list>
+      
+        <ion-list ng-if="search1.length">
+            <ion-item 
+                collection-repeat="item in all_meals | orderBy:'name' | searchItems:search1"
+                collection-item-height="60"
+                collection-item-width="100%"
+                ui-sref="app.meal({ id: item.id })">
+                  <img src="img/checken.jpg" width="20%" align="right">
+
+                  {{item.name}}
+            </ion-item>
+        </ion-list>
     </ion-content>
- 
     <br>
     <br>
     <br>
@@ -71,5 +78,9 @@
         </a>
        </div>
     
-    </ion-content>
 </ion-view>
+<style>
+ 
+    </style>
+    
+    

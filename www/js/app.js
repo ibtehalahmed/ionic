@@ -156,9 +156,8 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
-    /*.state('app.chefsLocation', {
-        url: '/chefs',
-       params: { loc_id: { value: item.id } },
+    .state('app.chefs', {
+        url: '/chefs/:id',
 
         views: {
             'menuContent': {
@@ -170,9 +169,9 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
                 template: ''
             }
         }
-    })*/
+    })
     .state('app.profile', {
-        url: '/profile',
+        url: '/profile/:id',
         views: {
             'menuContent': {
                 templateUrl: 'templates/profile.html',
@@ -181,9 +180,7 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             'fabContent': {
                 template: '',
                 controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
+                    
                 }
             }
         }

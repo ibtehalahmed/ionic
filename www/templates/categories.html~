@@ -1,0 +1,94 @@
+<ion-view view-title=" الاصناف">
+     
+      
+    <ion-header-bar class="bar-light bar-subheader">
+
+        <label>
+
+      <button 
+        class="button button-icon ion-android-search input-button"
+         ng-model="clicked" ng-click="check_search_clicked()" ng-hide="type">
+      </button>
+
+        </label>
+      <button ng-if="search.length && clicked""
+        class="button button-icon ion-android-close input-button"
+        ng-click="clearSearch()">
+      </button>
+       <button ng-if="search1.length && clicked""
+        class="button button-icon ion-android-close input-button"
+        ng-click="clearSearch()">
+      </button> 
+      <label class="item item-input " ng-show="clicked" ng-hide="search1.length">
+      
+      <input type="search" 
+        placeholder="أدخل منطقتك لتجد أقرب الطباخين"
+        ng-model="search">
+      </label>
+      <label class="item item-input " ng-show="clicked" ng-hide="search.length">
+
+      <input type="search" " 
+        placeholder="ابحث عن وجبة"
+        ng-model="search1" >
+      </label>
+    </ion-header-bar>
+    <ion-content>
+    <div class="list top" ng-if="search.length" align="left">
+        <a class="link item my-item"
+          collection-repeat="item in locations | orderBy:'name' | searchItems:search"
+          collection-item-height="60"
+          collection-item-width="100%"
+          ui-sref="app.profile({ id: item.id })">
+          
+          {{item.name}}
+        </a>
+      </div>
+    </ion-content>
+    <ion-content>
+    <div class="list top1" ng-if="search1.length" align="right">
+        <a class=" link item my-item" 
+          collection-repeat="item in all_meals | orderBy:'name' | searchItems:search1"
+          collection-item-height="60"
+          collection-item-width="100%"
+	  ui-sref="app.meal({ id: m.id })" 
+          >
+                       <img src="img/checken.jpg" width="20%" align="right">
+
+          {{item.name}}
+        </a>
+      </div>
+    </ion-content>
+ 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+
+       <div class="list" ng-repeat="c in all_cats" ng-hide="clicked">
+         <a class="item item-thumbnail-right" ui-sref="app.meals">
+           <img src="img/checken.jpg">
+           <h2>{{c.name}}</h2>
+        </a>
+       </div>
+    
+    </ion-content>
+</ion-view>
+<style>
+    .top{
+
+         z-index:10001;
+    }
+    
+ .top1{
+         z-index:1000;
+    }
+ a
+{
+    position:relative;
+    overflow:auto;
+}
+    </style>
+    
+    
