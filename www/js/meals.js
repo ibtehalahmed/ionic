@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-angular.module('starter') .controller('mealsCtrl', function($scope,userModel, $timeout, $stateParams, ionicMaterialInk) {
+angular.module('starter') .controller('mealsCtrl', function($scope,$rootScope,userModel, $timeout, $stateParams, ionicMaterialInk) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -18,6 +18,6 @@ angular.module('starter') .controller('mealsCtrl', function($scope,userModel, $t
     ionicMaterialInk.displayEffect();
    userModel.get_meals();
 
-})
+});
 
 

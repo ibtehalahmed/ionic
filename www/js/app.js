@@ -174,7 +174,19 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
-    ;
+     .state('app.basket', {
+        url: '/basket',
+        
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/basket.html',
+                controller: 'basketCtrl'
+            },
+            'fabContent': {
+                template: ''
+            }
+        }
+    });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
