@@ -7,8 +7,7 @@
                 
             </div>
         </div>
-         <form>
-
+      <form>
         <div class="list list-inset">
           <label class="item item-input">
               <input type="text" placeholder="البريد الالكتروني" ng-model="user.email">
@@ -16,18 +15,24 @@
           <label class="item item-input">
               <input type="password" placeholder="كلمة السر" ng-model="user.password">
           </label>
-      </div>
+        </div>
              <div class="row">
-             <div class="col">
-               &nbsp&nbsp <button class="button  button-dark" ng-click="login(user)">تسجيل الدخول</button>
+                <div class="col">
+                  &nbsp&nbsp <button class="button  button-dark" ng-click="login(user)">تسجيل الدخول</button>
+                </div>
+                <div class="col">
+                   <button  class="button button-balanced link  ">تسجيل لأول مرة</button>
+                </div>
              </div>
+      </form>
+    <button class="button icon-right ion-chevron-right button-calm" ui-sref="app.categories" >تخطي</button>
+
+             <div id="error">
              <div class="col">
             <button  class="button button-balanced link  ">تسجيل لأول مرة</button>
              </div>
              </div>
-<div>
-    <button class="button icon-right ion-chevron-right button-calm" ui-sref="app.categories" >تخطي</button>
-        </div>
+
  <div id="error">
              </div>
        <!-- <div class="button-bar social-login">

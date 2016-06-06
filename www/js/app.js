@@ -34,6 +34,8 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
 
     // Turn off caching for demo simplicity's sake
     $ionicConfigProvider.views.maxCache(0);
+    //$ionicFilterBarConfigProvider.clear('ion-ios-close-empty');
+
 
     /*
     // Turn off back button text
@@ -46,10 +48,6 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
     })
-
-
-
-  
 
 
     .state('app.login', {
@@ -93,7 +91,8 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
     })
 
         .state('app.meal', {
-        url: '/meal',
+        url: '/meal/:id',
+        
         views: {
             'menuContent': {
                 templateUrl: 'templates/meal.html',
@@ -157,8 +156,22 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
+    .state('app.chefs', {
+        url: '/chefs/:id',
+
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/chefs.html',
+                controller: 'chefsCtrl'
+            },
+            
+            'fabContent': {
+                template: ''
+            }
+        }
+    })
     .state('app.profile', {
-        url: '/profile',
+        url: '/profile/:id',
         views: {
             'menuContent': {
                 templateUrl: 'templates/profile.html',
@@ -167,13 +180,12 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             'fabContent': {
                 template: '',
                 controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
+                    
                 }
             }
         }
     })
+
      .state('app.basket', {
         url: '/basket',
         
@@ -192,3 +204,4 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
     $urlRouterProvider.otherwise('/app/login');
 
 });
+

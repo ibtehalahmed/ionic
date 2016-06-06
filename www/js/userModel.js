@@ -1,5 +1,6 @@
 angular.module('starter').factory('userModel',function($http,$state,$rootScope){
   return {
+      //1-login function
             'login' : function(data){
            return $http({
               method: 'POST',
@@ -21,14 +22,16 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
    
     }).error(function(data,status,headers){
        
+        console.log(data,status,headers)
+       
       document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
         
 
 })
       
 },
-
-        'getcategories' :function(){    
+//2-get all categories
+ 'getcategories' :function(){    
     return $http ({
                 method : 'GET',
                 url : 'http://localhost:8000/api/category',
@@ -36,8 +39,8 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             }).success (
             function(response){
                 console.log(response);
-                                $rootScope.all_cats=response;
-         //                       $state.go('app.login')
+                $rootScope.all_cats=response;
+
             }
             
             ).error (
@@ -46,20 +49,18 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             }
             )
 },
-
-'get_meal' :function(){
+//3-get meal by id 
+'get_meal' :function($id){
     console.log("from mealCtrl to user model");
     return $http ({
                 method : 'GET',
-                url : 'http://localhost:8000/api/meal/1',
+                url : "http://localhost:8000/api/meal/"+$id,
 
             }).success (
             function(response){
-               // console.log(response);
-                                $rootScope.meal1=response;
-                                console.log('your object returned successfully');
-                                console.log($rootScope.meal1);
-                                $state.go('app.meal');
+               $rootScope.meal1=response[0]
+                  console.log('factory')
+                  console.log($rootScope.meal1)
             }
             
             ).error (
@@ -69,10 +70,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             )
 },
 
-
-
-
-
+//4-register user
 'register' : function(register_data){
     console.log('registeration');
     console.log(register_data)
@@ -94,35 +92,33 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
         console.log(response);
 
         localStorage.setItem('auth',JSON.stringify(response));
-        //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+          
 
     }).error(function(data,status,headers){
       document.getElementById("error").innerHTML = "يرجي التأكد من ادخال البيانات الصحيحة";
 })
       
 },
+//5-check if user is authenticated
 'getAuthStatus' : function(){
     
     var status = localStorage.getItem('auth');
-if (status !== undefined)
-{
-    if (status){    
-   return true
-   
-    }
-        else {
-      return false      
-    }
-}
-},
+        if (status !== undefined)
+        {
+            if (status){    
+           return true
 
+            }
+                else {
+              return false      
+            }
+        }
+},
+//6-logout user
  'logout' : function(){
              localStorage.removeItem('auth');
-            
-             
  },
- 
+ //7-check if user type is customer or chef
  'check_user_type' : function($type){
      if ($type == 1){
          console.log('user is chef');
@@ -132,28 +128,26 @@ if (status !== undefined)
          $state.go('app.categories')
      }
  },
+ //8-get all locations
 'get_all_locations' : function(){
-           return $http({
-              method: 'GET',
-              url: 'http://localhost:8000/api/location',
+return $http ({
+		     method : 'GET',
+	             url : 'http://localhost:8000/api/location',
 
-    }).success(function(response){
-      //  console.log(response);
-        $rootScope.locations=response;
-    }).error(function(data,status,headers){
-        //console.log(data,status,headers)
-           // alert('Login error')
-  //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
 
-});
-      
-}
-  ,
+		}).success (
+			function(response){
+                            $rootScope.locations=response;
+                   	}).error (
+			function(data,status,headers){
+		            console.log('cannot get locations');
+			});
+},
+//9-add meal by popup
+
  'myPopup': function(meal){
-   //console.log(localStorage.getItem('auth'));
-    person=localStorage.getItem('auth');
+        person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
-     //console.log(parsePerson.id);
      return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/user/addmeal',
@@ -170,6 +164,7 @@ if (status !== undefined)
         
     }).success(function(response){
         console.log(response);
+
           person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
         id=parsePerson.id;
@@ -186,24 +181,17 @@ if (status !== undefined)
             function(data,status,headers){
                 console.log('error');
             })
-//  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+  
     }).error(function(data,status,headers){
-       // console.log(data,status,headers)
-         //   alert('cannot insert meal')
-      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
-
+       
 }) 
-     
-     
-     
-     
+  
  },
  
-       'submitSpecificOrder' :function(data)
+//10-add specific order
+ 'submitSpecificOrder' :function(data)
        {
-           
-                    return $http({
+           return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/specificorder',
               data: {
@@ -215,17 +203,16 @@ if (status !== undefined)
                 }        
     }).success(function(response){
         console.log(response);
-       // localStorage.setItem('auth',response);
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+        
     }).error(function(data,status,headers){
         console.log(data,status,headers)
       document.getElementById("error").innerHTML = "من فضلك املا كل البيانات";
 
 })
-       },
-       'get_meals' :function(){
-           
+},
+//11-get all meals
+'get_meals' :function(){
+         
                return $http ({
                 method : 'GET',
                 url : 'http://localhost:8000/api/meal',
@@ -233,8 +220,8 @@ if (status !== undefined)
             }).success (
             function(response){
                 console.log(response);
-                                $rootScope.all_meals=response;
-                                $state.go('app.meals')
+                $rootScope.all_meals=response;
+              //  $state.go('app.meals')
             }
             
             ).error (
@@ -242,6 +229,7 @@ if (status !== undefined)
                 console.log('error');
             }
             )
+
            
            
        }
@@ -322,13 +310,46 @@ if (status !== undefined)
        }
        
 
-        
-        
-        
-  /*      
-    */    
-        
-        
+            
+,
+//12-get chef data by id 
+'get_chef': function($id){
+    return $http ({
+                method : 'GET',
+                url : "http://localhost:8000/api/user/"+$id,
+
+            }).success (
+            function(response){
+               $rootScope.chef=response[0]
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+    
+},
+//13-get chefs by location
+'get_chefs_by_location': function($id){
+    return $http ({
+                method : 'GET',
+                url : "http://localhost:8000/api/chefs/"+$id,
+
+            }).success (
+            function(response){
+               $rootScope.chefs=response
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+    
 }
 
+
+  }
+  
 });

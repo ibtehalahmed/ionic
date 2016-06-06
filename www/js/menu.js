@@ -1,4 +1,4 @@
-angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope,$state,userModel, $ionicModal, $ionicPopover, $timeout) {
+angular.module('starter').controller('AppCtrl', function($ionicScrollDelegate,$scope,$http,$rootScope,$state,userModel, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
    
     $scope.loginData = {};
@@ -12,7 +12,7 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
             this.classList.toggle('active');
         });
     }
-
+ 
     ////////////////////////////////////////
     // Layout Methods
     ////////////////////////////////////////
@@ -33,11 +33,7 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
             }
         }
     };
-    $scope.checkAuth = function(){
-     check = userModel.getAuthStatus();
-        console.log(check);
-        $rootScope.check=check;   
-    }
+    
     $scope.setExpanded = function(bool) {
         $scope.isExpanded = bool;
         console.log( $scope.isExpanded);
@@ -87,14 +83,22 @@ angular.module('starter').controller('AppCtrl', function($scope,$http,$rootScope
             fabs[0].remove();
         }
     };
-    
+    $scope.checkAuth = function(){
+     check = userModel.getAuthStatus();
+        console.log(check);
+        $rootScope.check=check;   
+    };
     $scope.logout = function(){
-        userModel.logout();
-        $state.go('app.login');
-    
-}
+        userModel.logout();    
+    };
+    $scope.contacts =  [
+    {"id":1,"name":"أحمد"},
+{"id":2,"name":"أسماء"},
+{"id":3,"name":"غادة"},
+]
+  
 
-$scope.checkType=function(){
+  $scope.checkType=function(){
     $rootScope.type=false;
   
            if(typeof(localStorage.getItem('auth')) !== "object" ){
@@ -113,9 +117,10 @@ $scope.checkType=function(){
                 
                    
 }
-}
+};
 
-userModel.getcategories(); //new
 
-})        
+})
 
+
+ 

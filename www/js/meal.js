@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$stateParams,$ionicPopup,userModel,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
 
-console.log("from app to mealCtrl")
-$scope.$parent.showHeader();
+
+    console.log("from app to mealCtrl")
+    $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
@@ -28,8 +30,8 @@ $scope.$parent.showHeader();
    
     
     ionicMaterialInk.displayEffect();
-    w=userModel.get_meal();
     
+
     console.log("from usermodel to mealCtrl");
     console.log("your object arrived to  mealCtrl");
     console.log(w);
@@ -121,6 +123,13 @@ for (var i=0;i<allbasket.length;i++)
 //   // console.log(Basket);
 //    }
 
+    $scope.$on('$ionicView.enter',function(){
+
+
+        $id=$stateParams.id
+    
+        userModel.get_meal($id);
+})
 })
 
 

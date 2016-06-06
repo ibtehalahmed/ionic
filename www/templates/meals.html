@@ -9,11 +9,15 @@
        <h4 class="content padding double-padding-x">الوجبات</h4>
 
        <div class="list" ng-repeat="m in all_meals">
+<<<<<<< HEAD
        
 
  
         
          <a class="item item-thumbnail-right" ui-sref="app.meal">
+=======
+         <a class="item item-thumbnail-right" ui-sref="app.meal({ id: m.id })">
+>>>>>>> 9beaa55c2695c25f772a3c59e9f473699c261fdf
            <img src="img/checken.jpg">
            <h2>{{m.name}}</h2>
            <p>{{m.price}}</p>
