@@ -134,7 +134,8 @@ return $http ({
 		     method : 'GET',
 	             url : 'http://localhost:8000/api/location',
 
-			}).success (
+
+		}).success (
 			function(response){
                             $rootScope.locations=response;
                    	}).error (
@@ -143,6 +144,7 @@ return $http ({
 			});
 },
 //9-add meal by popup
+
  'myPopup': function(meal){
         person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
@@ -227,7 +229,88 @@ return $http ({
                 console.log('error');
             }
             )
-       }     
+
+           
+           
+       }
+        ,
+ 'make_order': function(order){
+    person=localStorage.getItem('auth');
+    parsePerson=JSON.parse(person);
+    allbasket=JSON.parse(localStorage.getItem('basketLocal'));
+   var Array=[];
+   order1={};
+     for (var i=0;i<allbasket.length;i++)
+    {
+        
+          console.log("allbasket[0]");
+         console.log(allbasket[i].meal.id);
+         console.log(allbasket[i].quantity);
+       //var obj={};
+         var id=allbasket[i].meal.id;
+        // idArray[i].push("meal_id",id);
+        var quantity=allbasket[i].quantity;
+       //// idArray[1].push("quan",quantity);
+       order1.meal_id=id;
+       order1.quantity=quantity;
+       Array.push(order1);
+        console.log("array");
+        //console.log(idArray.combine(quanArray));
+    }
+    console.log(Array)
+    
+    //mariesm=allbasket.pluck("meal.id");
+    //onsole.log("mariesm");
+     //console.log(mariesm);
+    return $http({
+              method: 'POST',
+              url: 'http://localhost:8000/api/user',
+              data: {
+                "order":Array,
+                "user_id":parsePerson.id
+            }
+        
+   }).success (
+            function(response){
+                console.log(response);
+                                
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+     
+ },
+ 
+       'submitSpecificOrder' :function(data)
+       {
+           
+                    return $http({
+              method: 'POST',
+              url: 'http://localhost:8000/api/specificorder',
+              data: {
+              
+                "name":data.name,
+                "quantity":data.quantity,
+                "description":data.description,
+                
+                }        
+    }).success(function(response){
+        console.log(response);
+       // localStorage.setItem('auth',response);
+      //  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+    }).error(function(data,status,headers){
+        console.log(data,status,headers)
+      document.getElementById("error").innerHTML = "من فضلك املا كل البيانات";
+
+})
+       }
+       
+
+            
 ,
 //12-get chef data by id 
 'get_chef': function($id){
