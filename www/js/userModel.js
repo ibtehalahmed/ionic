@@ -20,19 +20,10 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
      }
    
     }).error(function(data,status,headers){
+
         console.log(data,status,headers)
-          //  alert('Login error')
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+     document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
         
-        //localStorage.setItem('auth',JSON.stringify(response));
-    
-      //  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
-
-     //person=localStorage.getItem('auth');
-       // parsePerson=JSON.parse(person);
-       // console.log(parsePerson.usertype);
-
 
 })
       
@@ -41,7 +32,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
         'getcategories' :function(){    
     return $http ({
                 method : 'GET',
-                url : 'http://localhost:8000/api/category',
+                url : 'https://cook-cookapi.rhcloud.com/category',
 
             }).success (
             function(response){
@@ -108,7 +99,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
         //window.localStorage.setItem("password", response.password);   
 
     }).error(function(data,status,headers){
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال البيانات الصحيحة";
+      
 })
       
 },
@@ -180,9 +171,11 @@ if (status !== undefined)
         
     }).success(function(response){
         console.log(response);
+
          person=localStorage.getItem('auth');
         parsePerson=JSON.parse(person);
      id=parsePerson.id;
+
             return $http ({
                 method : 'GET',
                 url : 'http://localhost:8000/api/meals/u/'+id,
@@ -254,7 +247,94 @@ if (status !== undefined)
             )
            
            
-       }
+       },  
+ 'editPopup': function(mymeal){
+   //console.log(localStorage.getItem('auth'));
+    person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     //console.log(parsePerson.id);
+     return $http({
+              method: 'PUT',
+              url: 'http://localhost:8000/api/meal/'+id,
+              data: {
+              
+                "name":mymeal.name,
+                "time":mymeal.time,
+                "description":mymeal.description,
+                "quantity":mymeal.quantity,
+                "price":mymeal.price,
+                "category_id":mymeal.category_id,
+                "user_id":parsePerson.id
+            }
+        
+    }).success(function(response){
+        console.log(response);
+
+         person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     id=parsePerson.id;
+
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/'+id,
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+//  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+    }).error(function(data,status,headers){
+       // console.log(data,status,headers)
+         //   alert('cannot insert meal')
+      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+
+}) 
+ }
+ ,  
+ 'delPopup': function(dmeal){
+    console.log("UserModel");
+     console.log(dmeal); 
+     id=dmeal.id;
+     return $http({
+              method: 'DELETE',
+              url: 'http://localhost:8000/api/meal/'+id,
+              
+        
+    }).success(function(response){
+        console.log(response);
+
+         person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     id=parsePerson.id;
+
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/'+id,
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+//  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+    }).error(function(data,status,headers){
+       // console.log(data,status,headers)
+         //   alert('cannot insert meal')
+      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+
+}) 
+ }
        
 
         
@@ -265,5 +345,7 @@ if (status !== undefined)
         
         
 }
+
+
 
 });

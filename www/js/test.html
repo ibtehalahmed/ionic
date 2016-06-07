@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div class="container">
+    <div class="list">
+    <ion-md-input placeholder="اسم الوجبة"  type="text"ng-model="meal.name" required></ion-md-input>
+    <ion-md-input placeholder="وقت التحضير" highlight-color="energized" type="text"ng-model="meal.time" required></ion-md-input>
+    <ion-md-input placeholder="وصف الوجبة" highlight-color="energized" type="text"ng-model="meal.description" required></ion-md-input>
+    <ion-md-input placeholder="الكمية المتاحة" highlight-color="energized" type="text" ng-model="meal.quantity" required></ion-md-input>
+    <ion-md-input placeholder="سعر الوجبة" highlight-color="energized" type="text" ng-model="meal.price"required></ion-md-input> 
+    <select ng-model="meal.category_id"  highlight-color="energized"required>
+        <option value="" > ---------------التصنيف--------------- </option>
+        <option ng-repeat="c in all_categories" value={{c.id}}>{{c.name}}</option>
+    </select> 
+    </div>
+</div>',
+
+
+
+
+
+
+
+
+
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+<div class="container"><div class="list"><input ng-model="mymeal.name"  type="text" required><input ng-model="mymeal.time"  type="text" required>
+          <input ng-model="mymeal.description"  type="text" required>
+          <input ng-model="mymeal.quantity"  type="text" required>
+          <input ng-model="mymeal.price"  type="text" required>
+          
+         <select ng-model="meal.category_id"  highlight-color="energized" required>
+            <option value="" > ---------------التصنيف--------------- </option>
+            <option ng-repeat="c in all_categories" value={{c.id}}>{{c.name}}</option>
+        </select> 
+    </div>
+</div>',
+
+
+        <div>TODO write content</div>
+    </body>
+</html>

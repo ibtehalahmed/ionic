@@ -140,9 +140,13 @@ angular.module('starter.controllers', [])
        $state.go('app.categories');
     
 })
-
     }
+
     
-    ionicMaterialInk.displayEffect();
+
+   
+
+
+
 
 })

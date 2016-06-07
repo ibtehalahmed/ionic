@@ -1,5 +1,17 @@
 /* General
 ==================================*/
+
+ul.rating li {
+  display: inline;
+  border: 0px;
+  background: none;
+  padding: 5px 10px;
+}
+ul.rating li i {
+  font-size: 30px;
+}
+
+
 h1 {
     color: #fff;
     text-shadow: 0 1px 0px #000;
@@ -69,6 +81,7 @@ p {
     background-size: cover;
     border-radius: 50%;
     height: 125px;
+    marin-top:-50 px;
     margin: 0 auto;
     width: 125px;
 }
@@ -84,6 +97,10 @@ p {
 
 .my-color{
 background-color:orange !important;
+}
+
+.hero {
+    margin-top: 30px;
 }
 
 

@@ -1,5 +1,5 @@
-<ion-view view-title="Profile">
-    <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
+<ion-view view-title="الصفحه الشخصيه">
+    <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/back.png) center; background-size: cover;">
         <div class="hero slide-up" style="background-image: url('img/photo121.jpeg');">
             <div class="content">
                 <div class="avatar" style="background-image: url('img/chef1.jpeg');"></div>
@@ -19,13 +19,16 @@
 
         <div class="list" ng-repeat="m in list_meals">
 
-    <a class="item item-thumbnail-right" href="#">
+    <a class="item item-thumbnail-right" ui-sref="app.meal">
       <img src="img/checken.jpg">
-      <h2>{{m.name}}</h2>
-      <p>{{m.description}}</p>
-      <p>{{m.price}}LE</p>
-      
+      <h2>الاسم{{m.name}}</h2>
+      <p>الوصف{{m.description}}</p>
+      <p>السعر{{m.price}}LE</p>
+      <p>{{m.id}}</p>
+
     </a>
+      <button   ng-click="editPopup(m.id)" ng-show="type" class="button button-small  button-balanced">تعديل</button>
+      <button   ng-click="delPopup(m.id)" ng-show="type" class="button button-small  button-assertive">مسح</button>
 
 </div>
 
