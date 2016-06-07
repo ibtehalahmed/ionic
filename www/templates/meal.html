@@ -25,11 +25,11 @@
               </button>
             </ion-item>
    </div>
-     <div>
+     <!--<div>
         <ul>
             <li class="alert alert-info" ng-repeat="comment in comments track by $index">{{comment}}</li>
         </ul>
-    </div>
+    </div>-->
 
    
        <!--
@@ -43,7 +43,7 @@
 
    
     
-   
+   <!--
     
     <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
         <div class="hero slide-up" style="background-image: url('img/checken.jpg');">
@@ -54,18 +54,18 @@
 
       
         <h1 ng-repeat="m in meal1">{{m.name }}</h1>
-         <h1 ng-repeat="m in meal1">{{m.price }}جنيه</h1>
+         <h1 ng-repeat="m in meal1">{{m.price }}جنيه</h1> -->
           <h3>أضف الكمية</h3>
            <div class="input-group">
               
            <span class="input-group-btn">
-              <button type="button" class="btn btn-success btn-number" data-type="plus" ng-repeat="m in meal1" ng-click="addToCart(m)">
+              <button type="button" class="btn btn-success btn-number" data-type="plus"  ng-click="addToCart(meal1)">
                   <span class="glyphicon glyphicon-plus"></span>
               </button>
           </span>
           <input type="text" name="quant[2]" class="form-control input-number" value="{{numberOfitem}}" min="1" max="100">
           <span class="input-group-btn">
-              <button type="button" class="btn btn-danger btn-number" data-type="minus" min="1" max="100" data-field="quant[2]" ng-repeat="m in meal1"  ng-click="removefromCart(index)"  >
+              <button type="button" class="btn btn-danger btn-number" data-type="minus" min="1" max="100" data-field="quant[2]" ng-click="removefromCart(index)"  >
                 <span class="glyphicon glyphicon-minus"></span>
               </button>
           </span>

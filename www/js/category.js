@@ -7,23 +7,21 @@ angular.module('starter') .controller('CategoryController', function($ionicScrol
             userModel.getcategories();
             userModel.get_all_locations();
             userModel.get_meals();
-            $scope.clicked=false;
-
-            
+            $scope.clicked=false;     
     })
-
     $scope.clearSearch = function() {
     $scope.search = '';
     $scope.search1='';
     }
+    
     $scope.check_search_clicked =function(){
         if($scope.clicked === true){
             $scope.clicked=false;
         }else{
         $scope.clicked=true
         };
-                $scope.all_meals = $rootScope.all_meals
-
+        $scope.all_meals = $rootScope.all_meals
+console.log($scope.all_meals);
     }
 })
 //this filter is used to search array of locations and meals

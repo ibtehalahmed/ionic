@@ -30,7 +30,14 @@ angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$s
    
     
     ionicMaterialInk.displayEffect();
+    $scope.$on('$ionicView.enter',function(){
 
+
+        $id=$stateParams.id
+console.log('id');
+console.log($id);
+        userModel.get_meal($id);
+    })
  $scope.comments = [];
 /*
     $scope.setComment = function (comment) {
@@ -45,7 +52,6 @@ angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$s
 
     console.log("from usermodel to mealCtrl");
     console.log("your object arrived to  mealCtrl");
-    console.log(w);
     // console.log($rootScope.meal1)
     var basket=[];
     //  var basket= $stateParams.basket; 
@@ -121,13 +127,7 @@ for (var i=0;i<allbasket.length;i++)
     
 };
 
-    $scope.$on('$ionicView.enter',function(){
 
-
-        $id=$stateParams.id
-    
-        userModel.get_meal($id);
-    })
     
 
 })
