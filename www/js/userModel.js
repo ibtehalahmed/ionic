@@ -264,9 +264,35 @@ return $http ({
             }
             )
     
-}
+},
 
-
+//14-add comments by customer
+'add_comments':function(comment){
+       $scope.comment=comment
+        var newComment = $scope.comment;
+        person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+        id=parsePerson.id;
+        name=parsePerson.name;
+       // $scope.comment = {};
+        //$scope.comments.push(newComment);
+        return $http({
+              method: 'POST',
+              url: 'http://localhost:8000/api/comment',
+              data: {
+              "comment":comment.message,
+              "user_id":id
+        }
+    }).success(function(response){
+    console.log(response);    
+    })  
+    .error(function(data,status,headers){
+       
+        console.log(data,status,headers)
+       
+      document.getElementById("error").innerHTML = "لا يمكن اضافة تعليق";
+      })
   }
-  
-});
+  }
+
+  })

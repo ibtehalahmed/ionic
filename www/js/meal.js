@@ -28,13 +28,23 @@ angular.module('starter') .controller('mealCtrl', function($stateParams,$scope,$
    
     
     ionicMaterialInk.displayEffect();
-    
+ $scope.comments = [];
+/*
+    $scope.setComment = function (comment) {
+        userModel.add_comments();
+        
+    }
+  */    
+        
+       
     $scope.$on('$ionicView.enter',function(){
 
         $id=$stateParams.id
     
         userModel.get_meal($id);
-})
+    })
+    
+
 })
 
 
