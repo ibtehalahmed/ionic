@@ -21,8 +21,8 @@ angular.module('starter') .controller('CategoryController', function($ionicScrol
         $scope.clicked=true
         };
         $scope.all_meals = $rootScope.all_meals
-console.log($scope.all_meals);
-    }
+//console.log($scope.all_meals);
+    } 
 })
 //this filter is used to search array of locations and meals
     .filter('searchItems', function(){
@@ -41,7 +41,9 @@ console.log($scope.all_meals);
     return filtered;
   };
     });
-
     
 
+    
+    
 
+   
