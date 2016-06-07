@@ -238,29 +238,28 @@ return $http ({
     person=localStorage.getItem('auth');
     parsePerson=JSON.parse(person);
     allbasket=JSON.parse(localStorage.getItem('basketLocal'));
-   var Array=[];
-   order1={};
-     for (var i=0;i<allbasket.length;i++)
-    {
-        
-          console.log("allbasket[0]");
-         console.log(allbasket[i].meal.id);
-         console.log(allbasket[i].quantity);
-       //var obj={};
-         var id=allbasket[i].meal.id;
-        var quantity=allbasket[i].quantity;
-       order1.meal_id=id;
-       order1.quantity=quantity;
-       Array.push(order1);
-        console.log("array");
-    }
-    console.log(Array)
+   var Array1= [];
+      var Array2= [];
+
+var j=0;
+var order1={};
+var a=[];
+
+
+for (i=0 ;i<allbasket.length;i++ )
+{
+
+    Array1.push({ id: allbasket[i].meal.id, quantity: allbasket[i].quantity});
+
+}
+
+
  
     return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/order',
               data: {
-                "order":Array,
+                "order":Array1,
                 "user_id":parsePerson.id
             }
         

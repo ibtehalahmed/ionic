@@ -34,8 +34,7 @@ angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$s
 
 
         $id=$stateParams.id
-console.log('id');
-console.log($id);
+
         userModel.get_meal($id);
     })
  $scope.comments = [];
@@ -50,14 +49,9 @@ console.log($id);
 
     
 
-    console.log("from usermodel to mealCtrl");
-    console.log("your object arrived to  mealCtrl");
-    // console.log($rootScope.meal1)
     var basket=[];
-    //  var basket= $stateParams.basket; 
-   console.log(basket); 
-   var item=0;
-   $rootScope.numberOfitem=item;
+    var item=0;
+    $rootScope.numberOfitem=item;
     var mealObj=null;
  
     
@@ -66,70 +60,44 @@ console.log($id);
         item++;
         mealObj=m;
         basket.push(m); 
-        console.log(basket);       
         $rootScope.basket=basket;
-       // localStorage.removeItem('basketbasketLocal',JSON.stringify(m),'quantity',JSON.stringify(item));
         $rootScope.numberOfitem=item;
-        console.log("plus");
-        console.log(basket);   
-        // console.log(item);
-};	
-$scope.removefromCart=function(index){  
-            //console.log(m);
-        if(item=== 0)
-        {
-            item = 0 ;
-        }else{
-           item--;
-           basket.splice(index,1); 
-           $rootScope.basket=basket;
-           $rootScope.numberOfitem=item;  
-           console.log("minus");
-           console.log(basket);   
-        }        
-};	
+
+    };	
+    $scope.removefromCart=function(index){  
+            if(item=== 0)
+            {
+                item = 0 ;
+            }else{
+               item--;
+               basket.splice(index,1); 
+               $rootScope.basket=basket;
+               $rootScope.numberOfitem=item;  
+            }        
+    };	
 
     
     
 $scope.addToBasket=function(meals){ 
-    console.log("basket");
    $rootScope.basket=basket;
-  // $rootScope.numberOfmeals=item;  //new item 
    console.log(basket);
    var oldItems = JSON.parse(localStorage.getItem('basketLocal')) || [];
    
-    var newItem ={meal: mealObj, quantity: item }
-    console.log("oldItems");
-    console.log(oldItems);
+   var newItem ={meal: mealObj, quantity: item }
+
     oldItems.push(newItem);
     
     localStorage.setItem('basketLocal', JSON.stringify(oldItems));
     
-    console.log(localStorage.getItem('basketLocal'));
     allbasket=JSON.parse(localStorage.getItem('basketLocal'));
-    console.log("allbasket.length");
-    console.log(allbasket.length);
  
-   var mealsOfBasket = 0;
-for (var i=0;i<allbasket.length;i++)
-{
-        console.log("mealsOfBasket");
-        mealsOfBasket += allbasket[i].quantity;
-        $rootScope.numberOfmeals=mealsOfBasket;
-        console.log(mealsOfBasket);
-}
-
-    
-    
-    
-    
-    
-    
+    var mealsOfBasket = 0;
+    for (var i=0;i<allbasket.length;i++)
+        {
+            mealsOfBasket += allbasket[i].quantity;
+            $rootScope.numberOfmeals=mealsOfBasket;
+        }    
 };
-
-
-    
-
 })
 
 
