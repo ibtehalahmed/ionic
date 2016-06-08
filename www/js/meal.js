@@ -101,6 +101,7 @@ $scope.addToBasket=function(meals){
     var newItem ={meal: mealObj, quantity: item }
     console.log("oldItems");
     console.log(oldItems);
+    console.log(newItem);
     oldItems.push(newItem);
     
     localStorage.setItem('basketLocal', JSON.stringify(oldItems));
