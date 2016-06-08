@@ -4,7 +4,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             'login' : function(data){
            return $http({
               method: 'POST',
-              url: 'http://localhost:8000/api/auth',
+              url: ' http://localhost:8000/api/auth',
               data: {
               "email":data.email,
               "password":data.password
@@ -21,10 +21,10 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
      }
    
     }).error(function(data,status,headers){
+
        
         console.log(data,status,headers)
        
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
         
 
 })
@@ -95,24 +95,28 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
           
 
     }).error(function(data,status,headers){
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال البيانات الصحيحة";
+      
 })
       
 },
 //5-check if user is authenticated
 'getAuthStatus' : function(){
     
-    var status = localStorage.getItem('auth');
-        if (status !== undefined)
+    var person = localStorage.getItem('auth');
+    parsePerson=JSON.parse(person);
+    
+    if (person != undefined)
+    {
+        if (parsePerson.id !== undefined)
         {
-            if (status){    
+            if (parsePerson.id ){    
            return true
 
             }
                 else {
               return false      
             }
-        }
+        }   }
 },
 //6-logout user
  'logout' : function(){
@@ -135,7 +139,7 @@ return $http ({
 	             url : 'http://localhost:8000/api/location',
 
 
-		}).success (
+    }).success (
 			function(response){
                             $rootScope.locations=response;
                    	}).error (
@@ -165,9 +169,11 @@ return $http ({
     }).success(function(response){
         console.log(response);
 
-          person=localStorage.getItem('auth');
+         person=localStorage.getItem('auth');
+
         parsePerson=JSON.parse(person);
-        id=parsePerson.id;
+     id=parsePerson.id;
+
             return $http ({
                 method : 'GET',
                 url : 'http://localhost:8000/api/meals/u/'+id,
@@ -230,37 +236,122 @@ return $http ({
             )
 
            
-           
-       }
-        ,
+
+       },  
+ 'editPopup': function(mymeal){
+   //console.log(localStorage.getItem('auth'));
+    person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     //console.log(parsePerson.id);
+     return $http({
+              method: 'PUT',
+              url: 'http://localhost:8000/api/meal/'+id,
+              data: {
+              
+                "name":mymeal.name,
+                "time":mymeal.time,
+                "description":mymeal.description,
+                "quantity":mymeal.quantity,
+                "price":mymeal.price,
+                "category_id":mymeal.category_id,
+                "user_id":parsePerson.id
+            }
+        
+    }).success(function(response){
+        console.log(response);
+
+         person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     id=parsePerson.id;
+
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/'+id,
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+//  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+    }).error(function(data,status,headers){
+       // console.log(data,status,headers)
+         //   alert('cannot insert meal')
+      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+
+}) 
+ }
+ ,  
+ 'delPopup': function(dmeal){
+    console.log("UserModel");
+     console.log(dmeal); 
+     id=dmeal.id;
+     return $http({
+              method: 'DELETE',
+              url: 'http://localhost:8000/api/meal/'+id,
+              
+        
+    }).success(function(response){
+        console.log(response);
+
+         person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     id=parsePerson.id;
+
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/'+id,
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+//  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+    }).error(function(data,status,headers){
+       // console.log(data,status,headers)
+         //   alert('cannot insert meal')
+      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+
+}) 
+ },
+       
+
   //12-make order      
- 'make_order': function(order){
+    'make_order': function(order){
     person=localStorage.getItem('auth');
     parsePerson=JSON.parse(person);
     allbasket=JSON.parse(localStorage.getItem('basketLocal'));
-   var Array=[];
-   order1={};
-     for (var i=0;i<allbasket.length;i++)
-    {
-        
-          console.log("allbasket[0]");
-         console.log(allbasket[i].meal.id);
-         console.log(allbasket[i].quantity);
-       //var obj={};
-         var id=allbasket[i].meal.id;
-        var quantity=allbasket[i].quantity;
-       order1.meal_id=id;
-       order1.quantity=quantity;
-       Array.push(order1);
-        console.log("array");
-    }
-    console.log(Array)
+    console.log(allbasket);
+
+   var Array1= [];
+
+
+
+for (i=0 ;i<allbasket.length;i++ )
+{
+
+    Array1.push({ 'id': allbasket[i].meal.id, 'quantity': allbasket[i].quantity});
+
+}
+
+
  
     return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/order',
               data: {
-                "order":Array,
+                "order":Array1,
                 "user_id":parsePerson.id
             }
         
@@ -369,4 +460,5 @@ return $http ({
   }
   }
 
-  })
+
+  });

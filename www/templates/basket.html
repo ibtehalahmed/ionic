@@ -1,8 +1,11 @@
-<ion-view view-title="سلة الشراء">
+<ion-view view-title="سلة الشراء" align-title="left">
    
     <ion-nav-buttons >
-      <a   class="button  button-balanced button-clear   icon ion-android-cart" ></a>
-          <span class="badge badge-assertive">{{numberOfmeals}}</span>
+        <a   class="button  button-balanced button-clear   icon ion-android-cart" >
+                          <span class="badge badge-assertive" >{{numberOfmeals}}</span>
+
+        </a>
+          
     </ion-nav-buttons>
     
         <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
