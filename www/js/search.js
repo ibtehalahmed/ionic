@@ -2,7 +2,7 @@
 angular.module('starter', ['ionic'])
 
 
-.controller('searchCtrl', function($scope, $ionicScrollDelegate) {
+.controller('searchCtrl', function($scope, $ionicScrollDelegate,$ionicScroll) {
   $scope.contacts =  [
     {"id":1,"name":"أحمد"},
 {"id":2,"name":"أسماء"},
