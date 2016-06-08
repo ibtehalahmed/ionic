@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-        angular.module('starter').controller('ProfileCtrl', function($scope ,$http,$ionicPopup,$rootScope ,userModel,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+        angular.module('starter').controller('ProfileCtrl', function($stateParams,$scope ,$http,$ionicPopup,$rootScope ,userModel,$state,$timeout, ionicMaterialMotion, ionicMaterialInk) {
     // Set Header
    
     $scope.$parent.showHeader();
@@ -28,19 +28,31 @@
     }, 700);
 
        $scope.$on('$ionicView.enter',function(){
-        console.log('ghada');
 
+           if (localStorage.getItem('auth'))
+           {
            person=localStorage.getItem('auth'); 
-          console.log(typeof(person));
            if(typeof(person) != "undefined" ){
-             //  alert("uuuu");    
                parsePerson=JSON.parse(person);
                     $type= parsePerson.usertype;
                     console.log($type);
-                    $scope.type=$type;
-}  
+                    $scope.type=$type;}
+                    
+                    if ($type == 0){
+                      $id=$stateParams.id
+
+                      userModel.get_chef($id);}
+ else{
+  $id=parsePerson.id
+  userModel.get_chef($id);
+ }
+ }else{  
+               $id=$stateParams.id
+               userModel.get_chef($id);            
+           }
+           
        }) 
-     
+
      ionicMaterialInk.displayEffect();
      $scope.showPopup = function() {
   $scope.meal = {}
@@ -56,8 +68,7 @@
          type: 'button-positive',
          onTap: function(e) {
             if ($scope.meal.category_id == null||$scope.meal.category_id ===0||!$scope.meal.name ||!$scope.meal.price || !$scope.meal.description || !$scope.meal.quantity || !$scope.meal.time  ) {
-                 // console.log($scope.meal.category_id);
-                 ////don't allow the user to close unless he enters wifi password
+                 
                e.preventDefault();
             } else {
                return $scope.meal;
@@ -69,6 +80,7 @@
        userModel.myPopup(meal);//post req
    
    });
+
 
 
 };
@@ -205,7 +217,8 @@ $scope.$on('$ionicView.enter',function(){
 
 
 
+
+
 });
-//$scope.add_meal =function(meal){
-  //  userModel.add_meal(meal);
+
     

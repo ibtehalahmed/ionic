@@ -91,26 +91,14 @@ angular.module('starter.controllers', [])
 })        
 
 
- 
 
-
-.controller('OffersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-       
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $timeout(function() {
-       // $scope.$parent.hideHeader();
-    }, 0);
-    ionicMaterialInk.displayEffect();
-
-})
 
 
 
 
 
  
-.controller('AllOrdersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('ordersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $timeout(function() {

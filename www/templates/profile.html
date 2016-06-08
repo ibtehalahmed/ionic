@@ -1,4 +1,4 @@
-<ion-view view-title="الصفحه الشخصيه">
+<ion-view view-title="الصفحه الشخصيه" align-title="left">
     <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/back.png) center; background-size: cover;">
         <div class="hero slide-up" style="background-image: url('img/photo121.jpeg');">
             <div class="content">
@@ -8,14 +8,21 @@
         </div>
         <div class="tabs tabs-icon-top static my-color" >
             <a ui-sref="" class="tab-item">
-                <i class="icon ion-arrow-graph-up-right"></i> التعليقات
+                <i class="icon ion-chatbox"></i> التعليقات
             </a>
             <a ui-sref="" class="tab-item">
-                <i class="icon ion-android-people"></i> التقييم
+                <i class="icon ion-ios-star"></i> التقييم
+            </a>
+            <a ui-sref="app.orders" class="tab-item">
+                <i class="icon ion-ios-compose"></i> الطلبات
             </a>
          
         </div>
-
+        <div>
+            {{chef.name}}
+            {{chef.location}}
+            
+        </div>
 
         <div class="list" ng-repeat="m in list_meals">
 

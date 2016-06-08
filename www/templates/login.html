@@ -2,11 +2,12 @@
 
     <ion-content style="background: url(img/back.png) center; background-size: cover;">
         <div class="hero no-header flat">
-            <div class="content" >
+            <div class="content">
                 <div class="app-icon"></div>
                 
             </div>
         </div>
+
         <form name="f" novalidate="">
              
               <div class="row">
@@ -38,18 +39,28 @@
              
          </form>
         <div class="padding">
-        <button class="button button-full button-balanced link" ng-click="login(user)">تسجيل الدخول</button>
-        </div>
-        <div class="padding">
-            <div class="padding"></div>
-            <div class="padding"></div>
             
-        <button  class="button button button-balanced link  ">تسجيل لأول مرة</button>
-        <button  class="button button button-balanced link  " ui-sref="app.categories">تخطي</button>
+            
+               <button class="button button-full my-color link" ng-click="login(user)">تسجيل الدخول</button> 
+                    
+                </div>
+                    
+            
+        
+        <div class="padding"></div>
+            <div class="padding"></div>
+        <div class="padding">
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-80">
+            <a ui-sref="app.register">تسجيل لأول مرة</a>
+            </div>
+              <div class="col-100">  
+        <a ui-sref="app.categories">تخطي</a>
+              </div>
         </div>
-             
-
- 
+        </div>
+            
        <!-- <div class="button-bar social-login">
             <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
             <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
