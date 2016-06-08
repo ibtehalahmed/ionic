@@ -2,9 +2,6 @@
 'use strict';
 
 angular.module('starter.controllers', [])
-
-
-
 .controller('AppCtrl', function($scope,$http,$rootScope,$state, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
     $scope.loginData = {};
@@ -89,11 +86,6 @@ angular.module('starter.controllers', [])
     };
 
 })        
-
-
- 
-
-
 .controller('OffersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
        
     $scope.$parent.showHeader();
@@ -104,12 +96,6 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 
 })
-
-
-
-
-
- 
 .controller('AllOrdersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -119,8 +105,6 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 
 })
-
-
 .controller('SpecialOrderCtrl', function($scope,$state,userModel,$http,$rootScope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -138,11 +122,8 @@ angular.module('starter.controllers', [])
           userModel.submitSpecificOrder(data).then(function(){
               
        $state.go('app.categories');
-    
 })
-
     }
     
     ionicMaterialInk.displayEffect();
-
 })

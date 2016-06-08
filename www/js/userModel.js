@@ -10,10 +10,8 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
               "password":data.password
         }
     }).success(function(response){
-    console.log(response);    
     localStorage.setItem('auth',JSON.stringify(response));
      if (response.usertype == 1){
-         console.log('user is chef');
          $state.go('app.profile')
      }
      else{
@@ -22,7 +20,6 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
    
     }).error(function(data,status,headers){
        
-        console.log(data,status,headers)
        
       document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
         
@@ -51,7 +48,6 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
 },
 //3-get meal by id 
 'get_meal' :function($id){
-    console.log("from mealCtrl to user model");
     return $http ({
                 method : 'GET',
                 url : "http://localhost:8000/api/meal/"+$id,
@@ -59,7 +55,6 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             }).success (
             function(response){
                $rootScope.meal1=response[0]
-                  console.log('factory')
                   console.log($rootScope.meal1)
             }
             
@@ -102,18 +97,24 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
 //5-check if user is authenticated
 'getAuthStatus' : function(){
     
-    var status = localStorage.getItem('auth');
-        if (status !== undefined)
+    var person = localStorage.getItem('auth');
+    parsePerson=JSON.parse(person);
+    
+        if (person !=undefined)
         {
-            if (status){    
-           return true
+        if ( parsePerson.id !== undefined)
+        {
+            console.log('user is authenticated')
+            if (parsePerson.id){    
+            return true
 
             }
                 else {
               return false      
             }
         }
-},
+        }
+    },
 //6-logout user
  'logout' : function(){
              localStorage.removeItem('auth');
@@ -239,11 +240,7 @@ return $http ({
     parsePerson=JSON.parse(person);
     allbasket=JSON.parse(localStorage.getItem('basketLocal'));
    var Array1= [];
-      var Array2= [];
 
-var j=0;
-var order1={};
-var a=[];
 
 
 for (i=0 ;i<allbasket.length;i++ )
@@ -300,8 +297,7 @@ for (i=0 ;i<allbasket.length;i++ )
        }
        
 
-            
-,
+            ,
 //14-get chef data by id 
 'get_chef': function($id){
     return $http ({

@@ -20,6 +20,8 @@ angular.module('starter') .controller('basketCtrl', function($scope,$rootScope,u
     $scope.make_order=function(){
         userModel.make_order();
     };
-
+    $scope.editAddress=function(){
+        
+    }
     })
 
