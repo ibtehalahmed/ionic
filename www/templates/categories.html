@@ -1,5 +1,5 @@
-<ion-view view-title=" الاصناف" align-title="left">
-     
+<ion-view view-title=" الاصناف" align-title="left" hide-back-button="true" >
+    
     <ion-header-bar align-title="center" class="bar bar-subheader custom bar-energized"  ng-hide="type">
 
 
@@ -13,7 +13,7 @@
         class="button button-icon ion-android-search input-button"
          ng-model="clicked" ng-click="check_search_clicked()">
       </button>
-اضغط للبحث      
+اضغط للبحث باللغة العربية     
 
         </label>
     </ion-header-bar>
@@ -76,7 +76,7 @@
     <br>
     
 
-       <div class="list" ng-repeat="c in all_cats" ng-hide="clicked">
+       <div class="list" ng-repeat="c in all_cats" ng-hide="clicked"  >
          <a class="item item-thumbnail-right" ui-sref="app.meals">
            <img src="img/checken.jpg">
            <h2>{{c.name}}</h2>

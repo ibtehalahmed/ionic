@@ -4,7 +4,8 @@
           
         <ion-nav-bar class="my-color" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
          
-        <ion-nav-back-button class="button-clear pull-left ion-chevron-right " ></ion-nav-back-button>
+            <ion-nav-back-button class="button-clear pull-left ion-chevron-left"  >
+            </ion-nav-back-button>
       <ion-nav-buttons  side="left">
 
     
@@ -67,7 +68,7 @@
                  <ion-item nav-clear menu-close ui-sref="app.categories">
                   الاصناف
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.orders">
+                <ion-item nav-clear menu-close ng-show="type" ui-sref="app.orders">
                     الطلبات
                 </ion-item>
                 <ion-item nav-clear menu-close id="logout" ng-show="check" ui-sref="app.login" ng-click="logout()">

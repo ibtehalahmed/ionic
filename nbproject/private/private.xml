@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/new1/ionic1/www/js/app.js</file>
-            <file>file:/var/www/html/new1/ionic1/www/templates/meals.html</file>
-            <file>file:/var/www/html/new1/ionic1/www/js/profile.js</file>
-            <file>file:/var/www/html/new1/ionic1/www/templates/categories.html</file>
-            <file>file:/var/www/html/new1/ionic1/www/js/userModel.js</file>
-            <file>file:/var/www/html/new1/ionic1/www/templates/meal.html</file>
-            <file>file:/var/www/html/new1/ionic1/www/index.html</file>
+            <file>file:/var/www/html/ionic2/ionic/www/templates/menu.html</file>
+            <file>file:/var/www/html/ionic2/ionic/www/templates/special-order.html</file>
+            <file>file:/var/www/html/ionic2/ionic/www/index.html</file>
+            <file>file:/var/www/html/ionic2/ionic/www/templates/basket.html</file>
+            <file>file:/var/www/html/ionic2/ionic/www/js/userModel.js</file>
+            <file>file:/var/www/html/ionic2/ionic/www/templates/search.html</file>
+            <file>file:/var/www/html/ionic2/ionic/www/templates/register.html</file>
+            <file>file:/var/www/html/ionic2/ionic/www/js/category.js</file>
+            <file>file:/var/www/html/ionic2/ionic/www/templates/categories.html</file>
+            <file>file:/var/www/html/ionic2/ionic/www/js/basket.js</file>
         </group>
     </open-files>
 </project-private>
