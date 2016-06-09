@@ -4,7 +4,7 @@ angular.module('starter') .controller('LoginCtrl', function($scope,$rootScope,$s
      
     }, 0);
     ionicMaterialInk.displayEffect();
-    
+          // $scope.hide=false; 
    
     $scope.login = function(user){
         if (typeof user !== "undefined" )

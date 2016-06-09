@@ -13,6 +13,10 @@
       <img class="full-image" src="img/checken.jpg">
 {{meal1.description}}
    </div>
+          <div>
+              <p>الكمية المتاحة:{{meal1.quantity}}</p>            
+          </div>
+          
           <ion-item>
 
               <button 
@@ -58,22 +62,25 @@
         <h1 ng-repeat="m in meal1">{{m.name }}</h1>
          <h1 ng-repeat="m in meal1">{{m.price }}جنيه</h1> -->
           <h3>أضف الكمية</h3>
-           <div class="input-group">
+          <div id="error"></div>
+          <div class="input-group">
               
            <span class="input-group-btn">
-              <button type="button" class="btn btn-success btn-number" data-type="plus"  ng-click="addToCart(meal1)">
+              <button type="button" class="btn btn-success btn-number" data-type="plus" id="plus" ng-click="addToCart(meal1)">
+                  
                   <span class="glyphicon glyphicon-plus"></span>
               </button>
           </span>
-          <input type="text" name="quant[2]" class="form-control input-number" value="{{numberOfitem}}" min="1" max="100">
+          <input type="text" name="quant[2]" class="form-control input-number" value="{{numberOfitem}}" min="1" max={{meal1.quantity}}>
+           
           <span class="input-group-btn">
-              <button type="button" class="btn btn-danger btn-number" data-type="minus" min="1" max="100" data-field="quant[2]" ng-click="removefromCart(index)"  >
+              <button type="button" class="btn btn-danger btn-number" data-type="minus" min="1" max="{{meal1.quantity}}" data-field="quant[2]" ng-click="removefromCart(index)"  >
                 <span class="glyphicon glyphicon-minus"></span>
               </button>
           </span>
            
       </div>
-          <a   class="button  button-balanced button-clear   icon ion-android-cart" ng-click="addToBasket(meals)">أضف إلي سلتك</a>
+          <button   class="button  button-balanced button-clear   icon ion-android-cart" id="basket" ng-click="addToBasket(meals)">أضف إلي سلتك</button>
         
 
         

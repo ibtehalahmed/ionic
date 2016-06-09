@@ -57,18 +57,34 @@ angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$s
  
     
     $scope.addToCart=function(m){  
-        item++;
+         item++;
+        var limit1 =m.quantity;
+       var limit2=limit1+1;
+        console.log(item);
+        console.log(limit1);
+        if(item == limit1){
+            console.log("الكمية المتاحة نفذت");
+            $rootScope.numberOfitem=item; 
+            document.getElementById("plus").disabled = true;
+            $err="لا يمكنك طلب عدد وجبات اكبر من المتاح"
+            document.getElementById("error").innerHTML = $err;
+        // item++;
+         }else{
         mealObj=m;
         basket.push(m);
         $rootScope.basket=basket;
-        $rootScope.numberOfitem=item;
+        $rootScope.numberOfitem=item;   
+         }
+        
 
     };	
     $scope.removefromCart=function(index){  
-            if(item=== 0)
+        document.getElementById("plus").disabled = false;    
+        if(item=== 0)
             {
                 item = 0 ;
             }else{
+                document.getElementById("plus").disabled = false;    
                item--;
                basket.splice(index,1); 
                $rootScope.basket=basket;
@@ -79,7 +95,12 @@ angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$s
     
     
 $scope.addToBasket=function(meals){ 
- 
+//    console.log("item");
+// console.log(item);
+    if (item == 0){
+     console.log("اضف الكميه اولا");
+  }else{
+     
    var oldItems = JSON.parse(localStorage.getItem('basketLocal')) || [];
    var newItem ={meal: mealObj, quantity: item }
     oldItems.push(newItem);
@@ -93,7 +114,8 @@ console.log(oldItems);
         {
             mealsOfBasket += allbasket[i].quantity;
             $rootScope.numberOfmeals=mealsOfBasket;
-        }    
+        } 
+    }
 };
 })
 

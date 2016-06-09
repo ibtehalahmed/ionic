@@ -24,7 +24,8 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
 
        
         console.log(data,status,headers)
-       
+        $err="من فضلك تأكد من ادخال كلمه المرور و الايميل الصحيحين "
+        document.getElementById("error").innerHTML = $err;
         
 
 })
