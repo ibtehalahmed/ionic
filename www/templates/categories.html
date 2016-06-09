@@ -1,6 +1,11 @@
-<ion-view view-title=" الاصناف">
+<ion-view view-title=" الاصناف" align-title="left">
      
     <ion-header-bar align-title="center" class="bar bar-subheader custom bar-energized"  ng-hide="type">
+
+
+    </ion-header-bar>
+    
+    <ion-header-bar align-title="center" class="bar bar-subheader custom "  ng-hide="type">
 
         <label>
             
@@ -58,9 +63,7 @@
                 collection-item-height="60"
                 collection-item-width="100%"
                 ui-sref="app.meal({ id: item.id })">
-                  <img src="img/checken.jpg" width="20%" align="right">
-
-                  {{item.name}}
+                  <img src="img/checken.jpg" width="20%" align="right">                  {{item.name}}
             </ion-item>
         </ion-list>
     </ion-content>

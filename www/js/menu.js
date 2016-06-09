@@ -100,8 +100,7 @@ angular.module('starter').controller('AppCtrl', function($ionicScrollDelegate,$s
 
   $scope.checkType=function(){
     $rootScope.type=false;
-  
-           if(typeof(localStorage.getItem('auth')) !== "object" ){
+          if(typeof(localStorage.getItem('auth')) !== "object" ){
 
                   person=localStorage.getItem('auth');       
                   parsePerson=JSON.parse(person);

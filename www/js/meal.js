@@ -5,9 +5,6 @@
  */
 
 angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$stateParams,$ionicPopup,userModel,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-
-
-    console.log("from app to mealCtrl")
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -37,6 +34,7 @@ angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$s
 
         userModel.get_meal($id);
     })
+    
  $scope.comments = [];
 /*
     $scope.setComment = function (comment) {
@@ -52,14 +50,13 @@ angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$s
     var basket=[];
     var item=0;
     $rootScope.numberOfitem=item;
-    var mealObj=null;
+    var mealObj="undefined";
  
     
     $scope.addToCart=function(m){  
-           
         item++;
         mealObj=m;
-        basket.push(m); 
+        basket.push(m);
         $rootScope.basket=basket;
         $rootScope.numberOfitem=item;
 
@@ -79,18 +76,16 @@ angular.module('starter') .controller('mealCtrl', function($scope,$rootScope ,$s
     
     
 $scope.addToBasket=function(meals){ 
-   $rootScope.basket=basket;
-   console.log(basket);
+ 
    var oldItems = JSON.parse(localStorage.getItem('basketLocal')) || [];
    
    var newItem ={meal: mealObj, quantity: item }
-
     oldItems.push(newItem);
     
     localStorage.setItem('basketLocal', JSON.stringify(oldItems));
     
     allbasket=JSON.parse(localStorage.getItem('basketLocal'));
- 
+console.log(oldItems); 
     var mealsOfBasket = 0;
     for (var i=0;i<allbasket.length;i++)
         {

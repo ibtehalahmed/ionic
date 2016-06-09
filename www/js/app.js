@@ -64,18 +64,7 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
         }
     })
 
-        .state('app.offers', {
-        url: '/offers',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/offers.html',
-                controller: 'OffersCtrl'
-            },
-            'fabContent': {
-                template: ''
-            }
-        }
-    })
+
 
         .state('app.meals', {
         url: '/meals',
@@ -118,19 +107,8 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
+    
 
-        .state('app.allorders', {
-        url: '/allorders',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/allorders.html',
-                controller: 'AllOrdersCtrl'
-            },
-            'fabContent': {
-                template: ''
-            }
-        }
-    })
 
         .state('app.special-order', {
         url: '/special-order',
@@ -156,6 +134,7 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
+
     .state('app.chefs', {
         url: '/chefs/:id',
 
@@ -170,6 +149,7 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             }
         }
     })
+
     .state('app.profile', {
         url: '/profile/:id',
         views: {
@@ -186,6 +166,7 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
         }
     })
 
+
      .state('app.basket', {
         url: '/basket',
         
@@ -198,10 +179,26 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
                 template: ''
             }
         }
+    })
+
+ .state('app.orders', {
+        url: '/orders',
+        
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/orders.html',
+                controller: 'ordersCtrl'
+            },
+            'fabContent': {
+                template: ''
+            }
+        }
     });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
 
-});
+})
+
+
 

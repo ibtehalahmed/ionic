@@ -4,7 +4,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             'login' : function(data){
            return $http({
               method: 'POST',
-              url: 'http://localhost:8000/api/auth',
+              url: ' http://localhost:8000/api/auth',
               data: {
               "email":data.email,
               "password":data.password
@@ -19,9 +19,9 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
      }
    
     }).error(function(data,status,headers){
+
        
        
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
         
 
 })
@@ -90,7 +90,7 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
           
 
     }).error(function(data,status,headers){
-      document.getElementById("error").innerHTML = "يرجي التأكد من ادخال البيانات الصحيحة";
+      
 })
       
 },
@@ -100,21 +100,21 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
     var person = localStorage.getItem('auth');
     parsePerson=JSON.parse(person);
     
-        if (person !=undefined)
+
+    if (person != undefined)
+    {
+        if (parsePerson.id !== undefined)
         {
-        if ( parsePerson.id !== undefined)
-        {
-            console.log('user is authenticated')
-            if (parsePerson.id){    
-            return true
+            if (parsePerson.id ){    
+           return true
 
             }
                 else {
               return false      
             }
-        }
-        }
-    },
+
+        }   }
+},
 //6-logout user
  'logout' : function(){
              localStorage.removeItem('auth');
@@ -136,7 +136,7 @@ return $http ({
 	             url : 'http://localhost:8000/api/location',
 
 
-		}).success (
+    }).success (
 			function(response){
                             $rootScope.locations=response;
                    	}).error (
@@ -166,9 +166,11 @@ return $http ({
     }).success(function(response){
         console.log(response);
 
-          person=localStorage.getItem('auth');
+         person=localStorage.getItem('auth');
+
         parsePerson=JSON.parse(person);
-        id=parsePerson.id;
+     id=parsePerson.id;
+
             return $http ({
                 method : 'GET',
                 url : 'http://localhost:8000/api/meals/u/'+id,
@@ -231,14 +233,98 @@ return $http ({
             )
 
            
-           
-       }
-        ,
+
+       },  
+ 'editPopup': function(mymeal){
+    person=localStorage.getItem('auth');
+    parsePerson=JSON.parse(person);
+     return $http({
+              method: 'PUT',
+              url: 'http://localhost:8000/api/meal/'+id,
+              data: {
+              
+                "name":mymeal.name,
+                "time":mymeal.time,
+                "description":mymeal.description,
+                "quantity":mymeal.quantity,
+                "price":mymeal.price,
+                "category_id":mymeal.category_id,
+                "user_id":parsePerson.id
+            }
+        
+    }).success(function(response){
+        console.log(response);
+
+         person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     id=parsePerson.id;
+
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/'+id,
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+//  window.localStorage.setItem("email", response.email);
+        //window.localStorage.setItem("password", response.password);   
+    }).error(function(data,status,headers){
+       // console.log(data,status,headers)
+         //   alert('cannot insert meal')
+      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
+
+}) 
+ }
+ ,  
+ 'delPopup': function(dmeal){
+    console.log("UserModel");
+     console.log(dmeal); 
+     id=dmeal.id;
+     return $http({
+              method: 'DELETE',
+              url: 'http://localhost:8000/api/meal/'+id,
+              
+        
+    }).success(function(response){
+        console.log(response);
+
+         person=localStorage.getItem('auth');
+        parsePerson=JSON.parse(person);
+     id=parsePerson.id;
+
+            return $http ({
+                method : 'GET',
+                url : 'http://localhost:8000/api/meals/u/'+id,
+            }).success (
+            function(response){
+                console.log(response);
+                                $rootScope.list_meals=response;
+                            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+  
+    }).error(function(data,status,headers){
+       
+}) 
+ },
+       
+
   //12-make order      
- 'make_order': function(order){
+    'make_order': function(order){
     person=localStorage.getItem('auth');
     parsePerson=JSON.parse(person);
     allbasket=JSON.parse(localStorage.getItem('basketLocal'));
+    console.log(allbasket);
+
    var Array1= [];
 
 
@@ -246,7 +332,7 @@ return $http ({
 for (i=0 ;i<allbasket.length;i++ )
 {
 
-    Array1.push({ id: allbasket[i].meal.id, quantity: allbasket[i].quantity});
+    Array1.push({ 'id': allbasket[i].meal.id, 'quantity': allbasket[i].quantity});
 
 }
 
@@ -262,13 +348,14 @@ for (i=0 ;i<allbasket.length;i++ )
         
    }).success (
             function(response){
-                console.log(response);
+document.getElementById("order").innerHTML = "تم اضافة طلبك وانتظر مكالمة من الشيف للتأكيد"
                                 
             }
             
             ).error (
             function(data,status,headers){
-                console.log('error');
+document.getElementById("update").innerHTML = "لم تتم اضافة طلبك"
+
             }
             )
      
@@ -361,7 +448,42 @@ for (i=0 ;i<allbasket.length;i++ )
        
       document.getElementById("error").innerHTML = "لا يمكن اضافة تعليق";
       })
+  },
+  'get_location_by_id':  function($id){
+    return $http ({
+                method : 'GET',
+                url : "http://localhost:8000/api/location/"+$id,
+
+            }).success (
+            function(response){
+               $rootScope.location_name=response
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )
+    
+},
+'updateData':function(edit,$id){
+    return $http({
+              method: 'PUT',
+              url: 'http://localhost:8000/api/address/'+$id,
+              data: {
+              
+                "address":edit.address,
+                "location_id":edit.location
+
+            }
+        
+    }).success(function(response){
+document.getElementById("update").innerHTML = "تم تعديل العنوان"
+}).error(function(data,status,headers){
+document.getElementById("update").innerHTML = "لم يتم تعديل العنوان"
+               
+            })
   }
   }
 
-  })
+  });

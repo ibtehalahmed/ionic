@@ -1,17 +1,20 @@
-<ion-view view-title="Profile">
-    <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
-        <div class="hero slide-up" style="background-image: url('img/photo121.jpeg');">
+<ion-view view-title="الصفحه الشخصيه" align-title="left">
+    <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/back.png) center; background-size: cover;">
+        <div class="hero slide-up" style="background-image: url('img/checken.jpg');">
             <div class="content">
                 <div class="avatar" style="background-image: url('img/chef1.jpeg');"></div>
                 <h3><a class="light" ng-model="user.name">شيف</a></h3>
             </div>
         </div>
         <div class="tabs tabs-icon-top static my-color" >
-            <a ui-sref="app.activity" class="tab-item">
-                <i class="icon ion-arrow-graph-up-right"></i> التعليقات
+            <a ui-sref="app.comments" class="tab-item">
+                <i class="icon ion-chatbox"></i> التعليقات
             </a>
-            <a ui-sref="app.friends" class="tab-item">
-                <i class="icon ion-android-people"></i> معلوماتك الشخصية
+            <a ui-sref="app.rating" class="tab-item">
+                <i class="icon ion-ios-star"></i> التقييم
+            </a>
+            <a ui-sref="app.orders" class="tab-item">
+                <i class="icon ion-ios-compose"></i> الطلبات
             </a>
          
         </div>
@@ -23,13 +26,16 @@
 
         <div class="list" ng-repeat="m in list_meals">
 
-    <a class="item item-thumbnail-right" href="#">
+    <a class="item item-thumbnail-right" ui-sref="app.meal">
       <img src="img/checken.jpg">
-      <h2>{{m.name}}</h2>
-      <p>{{m.description}}</p>
-      <p>{{m.price}}LE</p>
-      
+      <h2>الاسم{{m.name}}</h2>
+      <p>الوصف{{m.description}}</p>
+      <p>السعر{{m.price}}LE</p>
+      <p>{{m.id}}</p>
+
     </a>
+      <button   ng-click="editPopup(m.id)" ng-show="type" class="button button-small  button-balanced">تعديل</button>
+      <button   ng-click="delPopup(m.id)" ng-show="type" class="button button-small  button-assertive">مسح</button>
 
 </div>
 

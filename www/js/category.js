@@ -21,21 +21,20 @@ angular.module('starter') .controller('CategoryController', function($ionicScrol
         $scope.clicked=true
         };
         $scope.all_meals = $rootScope.all_meals
-//console.log($scope.all_meals);
     } 
 })
 //this filter is used to search array of locations and meals
     .filter('searchItems', function(){
-  return function (items, query) {
-    var filtered = [];
-    var letterMatch = new XRegExp(query, 'i');
+        return function (items, query) {
+        var filtered = [];
+        var letterMatch = new XRegExp(query, 'i');
 
-    for (var i = 0; i < items.length; i++) {
-      var item = items[i];
-      if (query) {
-        if (letterMatch.test(item.name.substring(0, query.length))) {
-          filtered.push(item);
-        }
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (query) {
+                if (letterMatch.test(item.name.substring(0, query.length))) {
+                    filtered.push(item);
+                    }
       } 
     }
     return filtered;

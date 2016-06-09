@@ -1,28 +1,50 @@
-<ion-view view-title="سلة الشراء">
+<ion-view view-title="سلة الشراء" align-title="left">
    
     <ion-nav-buttons >
-      <a   class="button  button-balanced button-clear   icon ion-android-cart" ></a>
-          <span class="badge badge-assertive">{{numberOfmeals}}</span>
+        <a class="button  button-balanced button-clear   icon ion-android-cart" >
+           <span class="badge badge-assertive" >{{numberOfmeals}}</span>
+        </a>
+          
     </ion-nav-buttons>
     
         <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/bgg.png) center; background-size: cover;">
     
        <h4 class="content padding double-padding-x">سلة الشراء</h4>
 
-   <div class="list" ng-repeat="order in basket track by $index">
+        <div class="list" ng-repeat="order in basket track by $index">
             <a class="item item-thumbnail-right" >
                 <img src="img/checken.jpg">
                 <h2>{{order.meal.name}}</h2>
                 <h2>{{order.quantity}}</h2>
              </a>
-       </div>
-        <div class="form-group">
+        </div>
+       <form>
+               
+        <div>
             <label>نرجو تأكيد العنوان و المنطقة
-                <input type="text" ng-model="address">
+                <input type="text" ng-model="edit.address">
              </label> 
         </div>
-        <button ng-click="updateAddress()" type="submit" class="btn btn-default">Submit</button>
-
+           
+        <div class="list">
+           <label class="item item-input item-select "  value="" placeholder="المنطقة*">
+                <select class="dark"ng-model="edit.location" required>
+                    <option  value="" >{{location_name.name}}</option>
+                    <option ng-repeat="location in locations" value="{{location.id}}">
+                    {{location.name}}
+                    </option>
+                </select>
+           </label>
+        </div>
+        <button ng-click="updateAddress(edit)" type="submit" class="btn btn-default">أكد العنوان</button>
+        <div id="update">
+       </div>
+       </form>
+<div class="row">
+    <div class="col-xs-4">
         <button  class="button button-balanced link" ui-sref="app.basket" ng-click="make_order()" >      أطلــــــــــــــــب</button>
-    </ion-content>
+    </div>
+        <div class="col-xs-8" id="order">
+       </div>
+        </ion-content>
 </ion-view>

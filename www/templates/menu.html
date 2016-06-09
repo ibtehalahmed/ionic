@@ -1,31 +1,16 @@
 <ion-side-menus enable-menu-with-back-views="true">
     <ion-side-menu-content>
-
-          
         <ion-nav-bar class="my-color" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
-         
         <ion-nav-back-button class="button-clear pull-left ion-chevron-right " ></ion-nav-back-button>
-      <ion-nav-buttons  side="left">
-
-    
+        <ion-nav-buttons  side="left">
                 <button  class="button button-icon button-clear pull-right ion-android-more-vertical" menu-toggle="right"ng-click="checkAuth(); checkType();">
                 </button>
                            
-                <a class="button  button-balanced button-clear   icon ion-android-cart"  ui-sref="app.basket" ></a>
-          <span class="badge badge-assertive">{{numberOfmeals}}</span>
-              
-         
-     
-     
+          <a class="button  button-balanced button-clear icon ion-android-cart" ng-hide="true" ui-sref="app.basket" width="20px">
+              <span class="badge badge-assertive" >{{numberOfmeals}}</span>
+          </a>
             </ion-nav-buttons>
-          
-
-
- 
-
-          
-
-        </ion-nav-bar>
+          </ion-nav-bar>
         <!--     <a class="button  button-balanced button-clear   icon ion-android-cart" ng-click="showMyBasket()" ui-sref="app.basket" ></a>
           <span class="badge badge-assertive">{{numberOfmeals}}</span>
 
@@ -43,9 +28,9 @@
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="right">
-        <ion-header-bar class="dark-bg expanded">
+        <ion-header-bar class="dark-bg bar-logo expanded">
             <span class="avatar" style="background: url('/img/logor.jpg'); background-size: cover;"></span>
-            <h2>اطبخلى</h2>
+            
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
             <ion-list>
@@ -57,17 +42,13 @@
                 <ion-item nav-clear menu-close ng-show="type" ui-sref="app.profile">
                     شيف بروفايل
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.offers">
-                   العروض المتاحه
-                </ion-item>
+                
 
                 <ion-item nav-clear menu-close ng-hide="check" ui-sref="app.register">
 
                    التسجيل لاول مره
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.allorders">
-                   اطلب
-                </ion-item>
+                
 
                 <ion-item nav-clear menu-close ui-sref="app.special-order">
                    طلبك الخاص
@@ -75,9 +56,14 @@
                  <ion-item nav-clear menu-close ui-sref="app.categories">
                   الاصناف
                 </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.orders">
+                    الطلبات
+                </ion-item>
                 <ion-item nav-clear menu-close id="logout" ng-show="check"ng-click="logout()">
                     تسجيل الخروج
                 </ion-item>
+                
+                
                 
 
               
