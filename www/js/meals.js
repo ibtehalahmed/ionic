@@ -13,10 +13,13 @@ angular.module('starter') .controller('mealsCtrl', function($scope,$rootScope,us
     // Set Motion
    
 
-   
+    
     
     ionicMaterialInk.displayEffect();
-    userModel.get_meals();
+    $cid=$stateParams.id
+    console.log("category")
+    console.log($cid);
+    userModel.get_meals_by_category($cid);
     $scope.get_meal = function($id){
       userModel.get_meal($id);
 

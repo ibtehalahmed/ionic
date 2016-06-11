@@ -1,21 +1,30 @@
-<ion-view view-title="الصفحه الشخصيه" align-title="left">
+<ion-view view-title="الصفحه الشخصيه" align-title="left" hide-back-button="true">
     <ion-content ng-class="{expanded:$scope.isExpanded}" style="background: url(img/back.png) center; background-size: cover;">
         <div class="hero slide-up" style="background-image: url('img/checken.jpg');">
             <div class="content">
                 <div class="avatar" style="background-image: url('img/chef1.jpeg');"></div>
-                <h3><a class="light" ng-model="user.name">شيف</a></h3>
+                <div>
+                  <button id="fab-profile"  ng-click="showPopup()" ng-show="type" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>
+
+                </div>
+                <h3><a class="light" ng-model="user.name">شيف</a></h3>          
+            
+
             </div>
         </div>
         <div class="tabs tabs-icon-top static my-color" >
+
             <a ui-sref="app.comments" class="tab-item">
                 <i class="icon ion-chatbox"></i> التعليقات
             </a>
             <a ui-sref="app.rating" class="tab-item">
+
                 <i class="icon ion-ios-star"></i> التقييم
             </a>
             <a ui-sref="app.orders" class="tab-item">
                 <i class="icon ion-ios-compose"></i> الطلبات
             </a>
+ 
          
         </div>
         <div>
@@ -39,7 +48,6 @@
 
 </div>
 
-<button id="fab-profile"  ng-click="showPopup()" ng-show="type" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>
 
     </ion-content>
 </ion-view>

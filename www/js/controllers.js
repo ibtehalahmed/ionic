@@ -95,15 +95,7 @@ angular.module('starter.controllers', [])
 
 
  
-.controller('ordersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $timeout(function() {
-       // $scope.$parent.hideHeader();
-    }, 0);
-    ionicMaterialInk.displayEffect();
 
-})
 .controller('SpecialOrderCtrl', function($scope,$state,userModel,$http,$rootScope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();

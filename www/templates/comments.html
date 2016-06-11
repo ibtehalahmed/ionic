@@ -1,0 +1,33 @@
+
+
+<ion-view view-title="الوجبه" align-title="left">
+
+    <ion-content ng-class="{expanded:$scope.isExpanded}" class="card-background-page" style="background: url(img/back.png) center; background-size: cover;">
+        <h1>
+            التعليقات
+        </h1>
+        <ion-list>
+           <ion-item ng-repeat="comment in comments track by $index">
+               <div class="card" style="text-align: right">
+                   الاسم:{{comment.name}}
+                   <br>
+                   {{comment.comment}}
+                   <br>
+                   {{comment.comment_date}}
+               </div>
+           
+           </ion-item>
+       </ion-list>
+        <form ng-show="check_comment">
+            <div class="form-group">
+                 <label >النعليق
+                   <input type="text" ng-model="comment.text">
+                 </label> 
+            </div>
+            <button ng-click="setComment(comment)" type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <div id="error">
+            
+        </div>
+    </ion-content>
+</ion-view>

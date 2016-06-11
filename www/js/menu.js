@@ -91,11 +91,7 @@ angular.module('starter').controller('AppCtrl', function($ionicScrollDelegate,$s
     $scope.logout = function(){
         userModel.logout();    
     };
-    $scope.contacts =  [
-    {"id":1,"name":"أحمد"},
-{"id":2,"name":"أسماء"},
-{"id":3,"name":"غادة"},
-]
+
   
 
   $scope.checkType=function(){

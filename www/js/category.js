@@ -7,7 +7,9 @@ angular.module('starter') .controller('CategoryController', function($ionicScrol
             userModel.getcategories();
             userModel.get_all_locations();
             userModel.get_meals();
-            $scope.clicked=false;     
+            $scope.clicked=false;  
+            //$scope.hide=true; 
+
     })
     $scope.clearSearch = function() {
     $scope.search = '';

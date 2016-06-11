@@ -1,4 +1,4 @@
-angular.module('starter').factory('userModel',function($http,$state,$rootScope){
+angular.module('starter').factory('userModel',function($ionicPopup,$ionicHistory,$http,$state,$rootScope){
   return {
       //1-login function
             'login' : function(data){
@@ -21,7 +21,10 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
     }).error(function(data,status,headers){
 
        
-       
+
+        console.log(data,status,headers)
+        $err="من فضلك تأكد من ادخال كلمه المرور و الايميل الصحيحين "
+        document.getElementById("error").innerHTML = $err;
         
 
 })
@@ -67,8 +70,6 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
 
 //4-register user
 'register' : function(register_data){
-    console.log('registeration');
-    console.log(register_data)
            return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/register',
@@ -84,7 +85,6 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
             }
         
     }).success(function(response){
-        console.log(response);
 
         localStorage.setItem('auth',JSON.stringify(response));
           
@@ -105,12 +105,14 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
     {
         if (parsePerson.id !== undefined)
         {
-            if (parsePerson.id ){    
-           return true
+            if (parsePerson.id ){
+                $rootScope.check=true;
+                return true
 
             }
-                else {
-              return false      
+            else {
+                 $rootScope.check=false;
+                 return false      
             }
 
         }   }
@@ -118,6 +120,8 @@ angular.module('starter').factory('userModel',function($http,$state,$rootScope){
 //6-logout user
  'logout' : function(){
              localStorage.removeItem('auth');
+             localStorage.removeItem('basketLocal');
+
  },
  //7-check if user type is customer or chef
  'check_user_type' : function($type){
@@ -215,13 +219,14 @@ return $http ({
 },
 //11-get all meals
 'get_meals' :function(){
-         
+
                return $http ({
                 method : 'GET',
-                url : 'http://localhost:8000/api/meal',
+                url : 'http://localhost:8000/api/meal/',
 
             }).success (
             function(response){
+                console.log("meal by category")
                 console.log(response);
                 $rootScope.all_meals=response;
             }
@@ -272,13 +277,9 @@ return $http ({
             function(data,status,headers){
                 console.log('error');
             })
-//  window.localStorage.setItem("email", response.email);
-        //window.localStorage.setItem("password", response.password);   
+  
     }).error(function(data,status,headers){
-       // console.log(data,status,headers)
-         //   alert('cannot insert meal')
-      //document.getElementById("error").innerHTML = "يرجي التأكد من ادخال الاسم و كلمة السر الصحيحة";
-
+     
 }) 
  }
  ,  
@@ -320,41 +321,32 @@ return $http ({
 
   //12-make order      
     'make_order': function(order){
+    localStorage.removeItem('basketLocal');
     person=localStorage.getItem('auth');
     parsePerson=JSON.parse(person);
     allbasket=JSON.parse(localStorage.getItem('basketLocal'));
-    console.log(allbasket);
-
    var Array1= [];
-
-
-
 for (i=0 ;i<allbasket.length;i++ )
 {
-
     Array1.push({ 'id': allbasket[i].meal.id, 'quantity': allbasket[i].quantity});
-
 }
-
-
- 
     return $http({
               method: 'POST',
               url: 'http://localhost:8000/api/order',
               data: {
                 "order":Array1,
                 "user_id":parsePerson.id
-            }
-        
+            }       
    }).success (
             function(response){
-document.getElementById("order").innerHTML = "تم اضافة طلبك وانتظر مكالمة من الشيف للتأكيد"
-                                
+                console.log("--------------------uuuuuuuuuuuu-------")
+                console.log(response)
+                document.getElementById("order").innerHTML = "تم اضافة طلبك وانتظر مكالمة من الشيف للتأكيد"                   
             }
             
             ).error (
             function(data,status,headers){
-document.getElementById("update").innerHTML = "لم تتم اضافة طلبك"
+                document.getElementById("update").innerHTML = "لم تتم اضافة طلبك"
 
             }
             )
@@ -424,31 +416,25 @@ document.getElementById("update").innerHTML = "لم تتم اضافة طلبك"
 
 //15-add comments by customer
 'add_comments':function(comment){
-       $scope.comment=comment
-        var newComment = $scope.comment;
-        person=localStorage.getItem('auth');
-        parsePerson=JSON.parse(person);
-        id=parsePerson.id;
-        name=parsePerson.name;
-       // $scope.comment = {};
-        //$scope.comments.push(newComment);
         return $http({
-              method: 'POST',
+              method: 'PUT',
               url: 'http://localhost:8000/api/comment',
               data: {
-              "comment":comment.message,
-              "user_id":id
+              "comment":comment,
         }
     }).success(function(response){
-    console.log(response);    
+        console.log(response);
+        localStorage.removeItem('comment_order');
+        console.log('id')
+       userModel.get_all_comments_of_meal()
     })  
+    //in case of cannot insert comment
     .error(function(data,status,headers){
-       
         console.log(data,status,headers)
-       
-      document.getElementById("error").innerHTML = "لا يمكن اضافة تعليق";
+        document.getElementById("error").innerHTML = "لا يمكن اضافة تعليق";
       })
   },
+  //16-get location by id
   'get_location_by_id':  function($id){
     return $http ({
                 method : 'GET',
@@ -466,6 +452,7 @@ document.getElementById("update").innerHTML = "لم تتم اضافة طلبك"
             )
     
 },
+//17-update customer data(address and location)
 'updateData':function(edit,$id){
     return $http({
               method: 'PUT',
@@ -479,11 +466,68 @@ document.getElementById("update").innerHTML = "لم تتم اضافة طلبك"
         
     }).success(function(response){
 document.getElementById("update").innerHTML = "تم تعديل العنوان"
-}).error(function(data,status,headers){
-document.getElementById("update").innerHTML = "لم يتم تعديل العنوان"
-               
-            })
-  }
-  }
+    }).error(function(data,status,headers){
+document.getElementById("update").innerHTML = "لم يتم تعديل العنوان"   
+ })
+  },
+//17-cancel_order
+  'cancel_order':function(){
+     localStorage.removeItem('basketLocal');
+         $ionicHistory.goBack();
 
+       },
+//18-get meals by category
+'get_meals_by_category':function($id){
+        return $http ({
+                method : 'GET',
+                url : "http://localhost:8000/api/meals/"+$id,
+
+            }).success (
+            function(response){
+               $rootScope.meals_category=response[0]
+                  console.log($rootScope.meals_category)
+            }
+            
+            ).error (
+            function(data,status,headers){
+                console.log('error');
+            })
+    },
+    //19-insert delivery time,confirm bit,decrease quantity of ordered meals
+  'chef_confirm':function(data,$order_id){
+      return $http({
+              method: 'PUT',
+              url: 'http://localhost:8000/api/order/'+$order_id,
+              data: {
+                "is_confirm":data.confirm_bit,
+                "user_id":data.user_id,
+                "time":data.time,
+                "meals":data.meals,
+                "total_price":data.total_price
+            }
+        
+    }).success(function(response){
+        console.log(response);
+  }).error(function(){
+      console.log('cannot update')
+  })
+  },
+  'get_all_comments_of_meal':function(comment){
+     $id=comment.meal_id;
+        console.log($id)
+        ///////if comment inserted ,get all comments from database
+            return $http ({
+                method : 'GET',
+                url : "http://localhost:8000/api/comments/"+$id,
+            }).success (
+            function(response){
+                console.log (response)
+               $rootScope.comments=response
+            }).error (
+            function(data,status,headers){
+                console.log('error');
+            }
+            )  
+  }
+  }
   });

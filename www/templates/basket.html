@@ -1,4 +1,4 @@
-<ion-view view-title="سلة الشراء" align-title="left">
+<ion-view view-title="سلة الشراء" align-title="left" hide-back-button="true">
    
     <ion-nav-buttons >
         <a class="button  button-balanced button-clear   icon ion-android-cart" >
@@ -15,10 +15,9 @@
             <a class="item item-thumbnail-right" >
                 <img src="img/checken.jpg">
                 <h2>{{order.meal.name}}</h2>
-                <h2>{{order.quantity}}</h2>
              </a>
         </div>
-       <form>
+       <form ng-if="check">
                
         <div>
             <label>نرجو تأكيد العنوان و المنطقة
@@ -37,14 +36,20 @@
            </label>
         </div>
         <button ng-click="updateAddress(edit)" type="submit" class="btn btn-default">أكد العنوان</button>
+
         <div id="update">
        </div>
        </form>
 <div class="row">
     <div class="col-xs-4">
-        <button  class="button button-balanced link" ui-sref="app.basket" ng-click="make_order()" >      أطلــــــــــــــــب</button>
+        <button  class="button button-balanced link" ui-sref="app.basket" ng-click="make_order()" >      أطلــــــــــــــــب</button>   
     </div>
-        <div class="col-xs-8" id="order">
+    <div class="col-xs-4">
+        <button  class="button button-bar-assertive link" ng-click="cancel_order()" >      ألغي الطلب</button>
+    </div>
+   </div>
+        <div class="row" id="order">
        </div>
+
         </ion-content>
 </ion-view>

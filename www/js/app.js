@@ -15,6 +15,27 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
     }else{
         $state.go('app.login')
     }
+    
+ allbasket=JSON.parse(localStorage.getItem('basketLocal'));
+ $rootScope.basket= allbasket;
+ $rootScope.type=false;
+ if(typeof(localStorage.getItem('auth')) !== "object" ){
+    person=localStorage.getItem('auth');         
+    parsePerson=JSON.parse(person);
+    if (parsePerson.id)
+        {
+           $types= parsePerson.usertype;
+           if ($types == 1){ 
+               $types=true;
+               $rootScope.type=$types;
+                } 
+           if ($types == 0){ 
+               $types=false;
+               $rootScope.type=$types;
+               } 
+                
+       }
+}
  // Hide the accessory sbar by default (remove this to show the accessory bar above the keyboard
 
         // for form inputs)
@@ -67,7 +88,7 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
 
 
         .state('app.meals', {
-        url: '/meals',
+        url: '/meals/:id',
         views: {
             'menuContent': {
                 templateUrl: 'templates/meals.html',
@@ -142,6 +163,20 @@ angular.module('starter', ['ionic','ui.select','starter.controllers','ionic-mate
             'menuContent': {
                 templateUrl: 'templates/chefs.html',
                 controller: 'chefsCtrl'
+            },
+            
+            'fabContent': {
+                template: ''
+            }
+        }
+    })
+       .state('app.comments', {
+        url: '/comments/:id',
+
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/comments.html',
+                controller: 'commentsCtrl'
             },
             
             'fabContent': {
