@@ -7,9 +7,10 @@
             التعليقات
         </h1>
         <ion-list>
-           <ion-item ng-repeat="comment in comments track by $index">
-               <div class="card" style="text-align: right">
-                   الاسم:{{comment.name}}
+           <ion-item ng-repeat="comment in comments track by $index"style="text-align: right">
+                                  {{comment.name}}
+
+               <div class="card" >
                    <br>
                    {{comment.comment}}
                    <br>

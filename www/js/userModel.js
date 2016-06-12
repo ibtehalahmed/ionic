@@ -58,7 +58,7 @@ angular.module('starter').factory('userModel',function($ionicPopup,$ionicHistory
             }).success (
             function(response){
                $rootScope.meal1=response[0]
-                  console.log($rootScope.meal1)
+               console.log($rootScope.meal1)
             }
             
             ).error (
